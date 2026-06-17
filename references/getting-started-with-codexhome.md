@@ -19,7 +19,7 @@ For clean distribution and safe upgrades, treat the reusable starter and each po
 
 1. Clone the clean starter repository for a new installation, or use this populated repository only when intentionally working in this instance.
 2. Ask Codex to initialize the instance, or run `uv run python scripts/bootstrap_instance.py`.
-3. Fill local path variables in `.env`.
+3. Fill `PROJECTS_ROOT` in `.env` if it was not provided during bootstrap.
 4. Read `AGENTS.md`.
 5. Read `AGENTS.local.md`.
 6. Read `README.local.md`.
@@ -33,7 +33,9 @@ Do not commit `.env`, raw logs, raw session notes, or developer-specific absolut
 
 Bootstrap creates local scaffold files without overwriting existing local files. Use `AGENTS.local.md` and `README.local.md` for committed instance-specific rules and setup notes that should not become starter-managed system content. Keep local secret values and developer paths in `.env`, not in local Markdown files.
 
-When an agent handles the initialization request, it should only run the bootstrap command and report the created scaffolds. It must leave `.env` with placeholder values from `.env.template` unless the user explicitly provides the desired local path values in the same request.
+When an agent handles the initialization request, it should run the bootstrap command and report the created scaffolds. Bootstrap sets `CODEX_HOME` to the current checkout. The agent must not infer `PROJECTS_ROOT`; it should write `PROJECTS_ROOT` only when the user explicitly provides the desired value.
+
+Use `uv run python scripts/bootstrap_instance.py --projects-root <path>` when the user provides `PROJECTS_ROOT` before the first bootstrap run. If `PROJECTS_ROOT` remains a placeholder after bootstrap, the agent should ask which project root to use. When the user answers, run `uv run python scripts/bootstrap_instance.py --env-only --projects-root <path>` so the dirty scaffold worktree does not block the local `.env` update.
 
 ## Add Projects
 
@@ -154,7 +156,7 @@ Starter maintainers should use [Starter Release Procedure](starter-release-proce
 After a clean checkout:
 
 1. Run `uv run python scripts/bootstrap_instance.py`.
-2. Configure `.env`.
+2. Configure `PROJECTS_ROOT` in `.env`, or run `uv run python scripts/bootstrap_instance.py --env-only --projects-root /path/to/projects` after bootstrap.
 3. Add the first project profile.
 4. Solve one small task with the agent.
 5. Close the session and confirm a raw note appears under `wiki/sessions/`.

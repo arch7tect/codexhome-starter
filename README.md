@@ -18,13 +18,25 @@ You can also start Codex in this checkout and ask:
 Initialize this CodexHome instance.
 ```
 
-Agents should satisfy that request by running `uv run python scripts/bootstrap_instance.py` from the repository root. Bootstrap leaves placeholder values in `.env`; agents must not infer or write real local paths unless the user explicitly provides those values in the same request.
+Agents should satisfy that request by running `uv run python scripts/bootstrap_instance.py` from the repository root. Bootstrap sets `CODEX_HOME` to the current checkout path. Agents must not infer `PROJECTS_ROOT`; they should pass `--projects-root <path>` only when the user explicitly provides that value.
 
-After bootstrap, edit `.env` and fill in local paths:
+After bootstrap, review `.env` and fill in `PROJECTS_ROOT` if it was not provided:
 
 ```bash
-CODEX_HOME=/path/to/CodexHome
+CODEX_HOME=/current/checkout/path
 PROJECTS_ROOT=/path/to/projects
+```
+
+You can provide `PROJECTS_ROOT` during bootstrap:
+
+```bash
+uv run python scripts/bootstrap_instance.py --projects-root /path/to/projects
+```
+
+If bootstrap already ran and the scaffold files are still uncommitted, update only `.env`:
+
+```bash
+uv run python scripts/bootstrap_instance.py --env-only --projects-root /path/to/projects
 ```
 
 Review `git status` and commit the initialized local scaffolds when they look right.
@@ -40,7 +52,7 @@ Clean starter distribution and populated instance updates are described in [Star
 Fill in developer-local paths in `.env`:
 
 ```bash
-CODEX_HOME=/path/to/CodexHome
+CODEX_HOME=/current/checkout/path
 PROJECTS_ROOT=/path/to/projects
 ```
 

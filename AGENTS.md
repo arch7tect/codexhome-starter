@@ -15,7 +15,7 @@ Project conventions:
 - Do not store developer-specific absolute home-directory paths in memory, project profiles, skills, or references. Use neutral variables defined by `.env.template`, project profiles, or local instance instructions instead.
 - Store local developer path values in gitignored `.env`; keep `.env.template` as the committed variable contract. Load `.env` before running commands that depend on those variables.
 - If `AGENTS.local.md` exists, read it after this file for instance-specific rules, variable names, project families, or local overlays. If the current agent runtime does not auto-load it, inspect it manually before using local context.
-- When a user asks to initialize or bootstrap this CodexHome instance, run `uv run python scripts/bootstrap_instance.py` from the repository root. Bootstrap creates `.env` from `.env.template` with placeholder values. Do not infer, discover, or write real local paths into `.env` unless the user explicitly provides those values in the same request; otherwise tell the user to edit `.env` after bootstrap.
+- When a user asks to initialize or bootstrap this CodexHome instance, run `uv run python scripts/bootstrap_instance.py` from the repository root. Bootstrap creates `.env` from `.env.template` and sets `CODEX_HOME` to the current checkout path. Do not infer or discover `PROJECTS_ROOT`; pass `--projects-root <path>` only when the user explicitly provides that value before the first bootstrap run. If `PROJECTS_ROOT` is still a placeholder after bootstrap, ask the user which project root to use; when they provide it, run `uv run python scripts/bootstrap_instance.py --env-only --projects-root <path>`.
 
 Repository layout:
 
