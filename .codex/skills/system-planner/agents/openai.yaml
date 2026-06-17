@@ -1,0 +1,4 @@
+interface:
+  display_name: "System Planner"
+  short_description: "Plan complex engineering work"
+  default_prompt: "Use $system-planner to break this change into verifiable implementation slices."

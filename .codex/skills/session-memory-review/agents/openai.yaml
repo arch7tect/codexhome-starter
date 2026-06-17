@@ -1,0 +1,4 @@
+interface:
+  display_name: "Session Memory Review"
+  short_description: "Preserve durable session learnings"
+  default_prompt: "Use $session-memory-review to preserve the useful learnings from this session."

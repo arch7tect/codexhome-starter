@@ -1,0 +1,4 @@
+interface:
+  display_name: "Commit Prep"
+  short_description: "Prepare clean commits"
+  default_prompt: "Use $commit-prep to commit the current intended changes."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Autonomous Development Loop"
+  short_description: "Coordinate multi-step work"
+  default_prompt: "Use $autonomous-development-loop to complete this task in verified slices."

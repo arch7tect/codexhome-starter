@@ -1,0 +1,4 @@
+interface:
+  display_name: "Change Designer"
+  short_description: "Design code changes first"
+  default_prompt: "Use $change-designer to design this change before editing files."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test And Verify"
+  short_description: "Run focused verification"
+  default_prompt: "Use $test-and-verify to validate the current changes."

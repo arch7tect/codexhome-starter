@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implementation Runner"
+  short_description: "Implement scoped changes"
+  default_prompt: "Use $implementation-runner to implement this scoped change and verify it."

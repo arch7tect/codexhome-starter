@@ -1,0 +1,4 @@
+interface:
+  display_name: "CodexHome Skill Creator"
+  short_description: "Create CodexHome project skills"
+  default_prompt: "Use $skill-creator to create a project-local skill for CodexHome."

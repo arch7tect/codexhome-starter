@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Wiki Lifecycle"
+  short_description: "Manage capture, promotion, verification, publish, stale review, archive, lint, and reporting for the CodexHome LLM wiki."
+  default_prompt: "Use $llm-wiki-lifecycle to manage the CodexHome LLM-wiki lifecycle."

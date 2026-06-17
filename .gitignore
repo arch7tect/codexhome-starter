@@ -1,0 +1,30 @@
+# Virtual environments
+.venv/
+venv/
+
+# Local developer environment
+.env
+.env.local
+!.env.template
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+
+# Local temporary artifacts
+tmp/
+incidents/tmp_*/
+incidents/**/artifacts/
+
+# LLM wiki raw session notes
+wiki/sessions/
+
+# Generated test fixtures
+scripts/tests/.generated/

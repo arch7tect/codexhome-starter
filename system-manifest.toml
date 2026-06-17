@@ -1,0 +1,398 @@
+schema_version = 1
+starter_version = "v0.1.0"
+description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
+default_class = "reserved_user"
+prune = "manual"
+matching = "specific_before_glob"
+
+# Sync tooling must prefer the most specific matching path entry before broader
+# reserved globs. The default class remains reserved_user for unmatched paths.
+
+[verification]
+commands = [
+  "uv run python scripts/wiki_lint.py",
+  "uv run python scripts/wiki_lint.py --profile autonomous",
+  "uv run python scripts/tests/test_wiki_lint.py",
+  "uv run python scripts/tests/test_system_lock.py",
+  "uv run python scripts/tests/test_sync_system.py",
+  "uv run python scripts/tests/test_release_hygiene.py",
+]
+
+[[paths]]
+path = "AGENTS.md"
+class = "managed"
+content = "text"
+note = "Portable agent rules only."
+
+[[paths]]
+path = "README.md"
+class = "managed"
+content = "text"
+note = "Starter-level orientation."
+
+[[paths]]
+path = "CLAUDE.md"
+class = "managed"
+content = "text"
+note = "Portable Claude Code orientation."
+
+[[paths]]
+path = ".env.template"
+class = "managed"
+content = "text"
+note = "Portable environment variable contract."
+
+[[paths]]
+path = ".gitignore"
+class = "managed"
+content = "text"
+note = "Starter-generic ignores only."
+
+[[paths]]
+path = ".python-version"
+class = "managed"
+content = "text"
+note = "Runtime pin for managed Python scripts."
+
+[[paths]]
+path = "pyproject.toml"
+class = "managed"
+content = "text"
+note = "Dependency contract for managed Python scripts."
+
+[[paths]]
+path = "uv.lock"
+class = "managed"
+content = "text"
+note = "Dependency lockfile for managed Python scripts."
+
+[[paths]]
+path = ".codex/skills/README.md"
+class = "managed"
+content = "text"
+note = "Generic skill directory rules."
+
+[[paths]]
+path = ".codex/skills/autonomous-development-loop/**"
+class = "managed"
+content = "text"
+note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/change-designer/**"
+class = "managed"
+content = "text"
+note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/ci-fixer/**"
+class = "managed"
+content = "text"
+note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/code-reviewer/**"
+class = "managed"
+content = "text"
+note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/commit-prep/**"
+class = "managed"
+content = "text"
+note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/implementation-runner/**"
+class = "managed"
+content = "text"
+note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/llm-wiki-lifecycle/**"
+class = "managed"
+content = "text"
+note = "Generic LLM wiki lifecycle skill."
+
+[[paths]]
+path = ".codex/skills/memory-curator/**"
+class = "managed"
+content = "text"
+note = "Generic memory curation skill."
+
+[[paths]]
+path = ".codex/skills/repo-cartographer/**"
+class = "managed"
+content = "text"
+note = "Generic repository mapping skill."
+
+[[paths]]
+path = ".codex/skills/session-memory-review/**"
+class = "managed"
+content = "text"
+note = "Generic session memory review skill."
+
+[[paths]]
+path = ".codex/skills/skill-creator/**"
+class = "managed"
+content = "text"
+note = "Generic skill authoring skill."
+
+[[paths]]
+path = ".codex/skills/system-planner/**"
+class = "managed"
+content = "text"
+note = "Generic planning skill."
+
+[[paths]]
+path = ".codex/skills/test-and-verify/**"
+class = "managed"
+content = "text"
+note = "Generic verification skill."
+
+[[paths]]
+path = "references/README.md"
+class = "managed"
+content = "text"
+note = "Generic reference directory rules."
+
+[[paths]]
+path = "references/getting-started-with-codexhome.md"
+class = "managed"
+content = "text"
+note = "Starter onboarding and user journey."
+
+[[paths]]
+path = "references/starter-instance-sync.md"
+class = "managed"
+content = "text"
+note = "Starter/instance sync architecture."
+
+[[paths]]
+path = "references/starter-release-procedure.md"
+class = "managed"
+content = "text"
+note = "Clean starter release gate and tagging procedure."
+
+[[paths]]
+path = "references/system/**"
+class = "managed"
+content = "text"
+note = "Generic starter system documents and scaffold sources."
+
+[[paths]]
+path = "projects/README.md"
+class = "managed"
+content = "text"
+note = "Generic project profile rules."
+
+[[paths]]
+path = "incidents/README.md"
+class = "managed"
+content = "text"
+note = "Generic incident directory rules."
+
+[[paths]]
+path = "wiki/system/**"
+class = "managed"
+content = "text"
+note = "Generic wiki lifecycle and page contract."
+
+[[paths]]
+path = "scripts/wiki_common.py"
+class = "managed"
+content = "text"
+note = "Generic wiki lint support."
+
+[[paths]]
+path = "scripts/wiki_lint.py"
+class = "managed"
+content = "text"
+note = "Generic wiki lint command."
+
+[[paths]]
+path = "scripts/wiki_status.py"
+class = "managed"
+content = "text"
+note = "Generic wiki health report command."
+
+[[paths]]
+path = "scripts/wiki_promote.py"
+class = "managed"
+content = "text"
+note = "Generic promotion draft command."
+
+[[paths]]
+path = "scripts/tests/test_wiki_lint.py"
+class = "managed"
+content = "text"
+note = "Generic wiki lint regression test."
+
+[[paths]]
+path = "scripts/system_lock.py"
+class = "managed"
+content = "text"
+note = "Generic system lock hashing and decision support."
+
+[[paths]]
+path = "scripts/tests/test_system_lock.py"
+class = "managed"
+content = "text"
+note = "Generic system lock regression test."
+
+[[paths]]
+path = "scripts/sync_system.py"
+class = "managed"
+content = "text"
+note = "Generic starter sync check, dry-run, lock adopt, and safe apply command."
+
+[[paths]]
+path = "scripts/release_hygiene.py"
+class = "managed"
+content = "text"
+note = "Clean starter release hygiene gate."
+
+[[paths]]
+path = "scripts/tests/test_sync_system.py"
+class = "managed"
+content = "text"
+note = "Generic starter sync check, dry-run, adopt, and apply regression test."
+
+[[paths]]
+path = "scripts/tests/test_release_hygiene.py"
+class = "managed"
+content = "text"
+note = "Clean starter release hygiene regression test."
+
+[[paths]]
+path = "system-manifest.toml"
+class = "managed"
+content = "text"
+note = "Starter sync manifest."
+
+[[paths]]
+path = "system-lock.toml"
+class = "managed"
+content = "text"
+generated = true
+note = "Starter sync lockfile, generated after bootstrap/adopt."
+
+[[paths]]
+path = ".env"
+class = "scaffold_once"
+content = "text"
+source = ".env.template"
+note = "Local developer environment values."
+
+[[paths]]
+path = "AGENTS.local.md"
+class = "scaffold_once"
+content = "text"
+note = "Local or organization-specific agent rules."
+
+[[paths]]
+path = "README.local.md"
+class = "scaffold_once"
+content = "text"
+note = "Local instance orientation."
+
+[[paths]]
+path = "references/index.local.md"
+class = "scaffold_once"
+content = "text"
+note = "Local reference index."
+
+[[paths]]
+path = "projects/_template.md"
+class = "scaffold_once"
+content = "text"
+note = "Initial project profile template."
+
+[[paths]]
+path = "projects/index.local.md"
+class = "scaffold_once"
+content = "text"
+note = "Local project index."
+
+[[paths]]
+path = "wiki/index.md"
+class = "scaffold_once"
+content = "text"
+source = "references/system/scaffolds/wiki-index.md"
+note = "Generic wiki navigation seed, local-owned after creation."
+
+[[paths]]
+path = "instance-manifest.toml"
+class = "scaffold_once"
+content = "text"
+note = "Optional local sync policy overlay."
+
+[[paths]]
+path = ".codex/skills/*"
+class = "reserved_user"
+note = "Any skill not explicitly listed as managed is instance-owned."
+
+[[paths]]
+path = "projects/*"
+class = "reserved_user"
+note = "Project profiles and local project indexes are instance-owned except explicit managed/scaffold entries."
+
+[[paths]]
+path = "incidents/*"
+class = "reserved_user"
+note = "Incident reports and artifacts are instance-owned."
+
+[[paths]]
+path = "references/*"
+class = "reserved_user"
+note = "Unlisted reference documents are instance-owned."
+
+[[paths]]
+path = "scripts/wiki_metrics.py"
+class = "reserved_user"
+note = "Validation experiment tooling, not starter core."
+
+[[paths]]
+path = "scripts/*"
+class = "reserved_user"
+note = "Unlisted scripts are instance-owned."
+
+[[paths]]
+path = "wiki/sessions/**"
+class = "reserved_user"
+note = "Raw local capture."
+
+[[paths]]
+path = "wiki/drafts/**"
+class = "reserved_user"
+note = "Local promotion drafts."
+
+[[paths]]
+path = "wiki/concepts/**"
+class = "reserved_user"
+note = "Instance-maintained concepts."
+
+[[paths]]
+path = "wiki/context-packs/**"
+class = "reserved_user"
+note = "Instance-maintained context packs."
+
+[[paths]]
+path = "wiki/decisions/**"
+class = "reserved_user"
+note = "Instance-maintained decisions."
+
+[[paths]]
+path = "wiki/fixtures/**"
+class = "reserved_user"
+note = "Local validation fixtures and experiment data."
+
+[[paths]]
+path = "wiki/validation-runs/**"
+class = "reserved_user"
+note = "Local validation output."
+
+[[paths]]
+path = "wiki/*"
+class = "reserved_user"
+note = "Unlisted wiki paths are instance-owned."
