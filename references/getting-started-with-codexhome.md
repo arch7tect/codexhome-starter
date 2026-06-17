@@ -109,6 +109,24 @@ The agent should use the repository remote to choose GitHub or GitLab behavior, 
 
 These workflows need the matching local Git host tool to be installed and authenticated. If it is missing, the agent should say what to configure and offer a safe fallback such as pushing the branch.
 
+When a pull request or merge request has conflicts, say:
+
+```text
+Resolve the merge conflicts for this project branch.
+```
+
+or:
+
+```text
+Resolve the conflicts reported by this GitHub pull request: <details>.
+```
+
+or:
+
+```text
+Resolve the conflicts reported by this GitLab merge request: <details>.
+```
+
 ## Investigate An Incident
 
 For an incident, give the project or system name and the symptom:
@@ -190,5 +208,6 @@ Use these phrases as your main control surface:
 - `Create a GitLab merge request for the current branch.`
 - `Check the GitHub pull request status and CI.`
 - `Check the GitLab merge request status and pipeline.`
+- `Resolve the merge conflicts for this project branch.`
 
 The system is working when you can stay at the level of intent and the agent can explain the plan, safety checks, changed files, and verification results.

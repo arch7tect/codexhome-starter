@@ -49,3 +49,11 @@ Before merging:
 - stop on ambiguity and ask the user.
 
 Do not use force push or history rewriting unless the user explicitly asks for that exact operation.
+
+## Conflict Resolution Boundary
+
+GitHub and GitLab workflow skills detect provider-reported conflicts, report the affected pull or merge request, and re-check provider status after a branch is updated.
+
+Local conflict mechanics are provider-neutral. When a pull or merge request reports conflicts, use `$merge-conflict-resolution` to inspect the local repository, resolve merge, rebase, cherry-pick, or stash-pop conflicts, run project verification, and prepare the branch for provider re-check.
+
+Conflict resolution must preserve unrelated local changes, avoid broad ours/theirs strategy shortcuts, resolve per hunk and per intent, and stop for a user decision when the correct behavior is ambiguous.

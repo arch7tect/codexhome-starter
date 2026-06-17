@@ -1,5 +1,5 @@
 schema_version = 1
-starter_version = "v0.1.8"
+starter_version = "v0.1.9"
 description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
 default_class = "reserved_user"
 prune = "manual"
@@ -127,6 +127,12 @@ path = ".codex/skills/gitlab-workflow/**"
 class = "managed"
 content = "text"
 note = "Generic GitLab merge request and pipeline workflow skill."
+
+[[paths]]
+path = ".codex/skills/merge-conflict-resolution/**"
+class = "managed"
+content = "text"
+note = "Generic local Git merge conflict resolution workflow skill."
 
 [[paths]]
 path = ".codex/skills/implementation-runner/**"

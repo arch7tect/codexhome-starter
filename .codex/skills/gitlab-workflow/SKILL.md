@@ -19,6 +19,7 @@ Do not use this skill for GitHub pull requests or provider-neutral initialized i
 - Prefer draft MRs unless the user asks for a ready MR.
 - If the repository remote is not GitLab, stop and report that this skill does not apply.
 - If the current checkout is CodexHome, confirm whether the user means the CodexHome instance or an external project repository. Use this skill only for project merge requests.
+- If GitLab reports MR conflicts, use `$merge-conflict-resolution` for local conflict mechanics. This skill only handles provider inspection, push, comments, and post-resolution re-checks.
 
 ## Preflight
 
@@ -82,6 +83,8 @@ glab ci status --branch <branch> --output json
 
 Summarize status, failing jobs, unresolved discussions, and any required user decision.
 
+If GitLab reports conflicts or an unmergeable state, report it and switch to `$merge-conflict-resolution` before attempting any local resolution. After the branch is updated, re-run the MR view and pipeline commands.
+
 ## Comments
 
 Before posting comments, show or summarize the intended comment unless the user already provided exact text.
@@ -100,7 +103,7 @@ Merge only when the user explicitly asks. Before merging, verify:
 - Current local HEAD matches the MR source branch when local state matters.
 - Required pipelines and approvals are passing, or the user explicitly accepts the risk.
 - Unresolved discussions are handled or explicitly accepted.
-- GitLab does not report conflicts.
+- GitLab does not report conflicts. If it does, resolve them through `$merge-conflict-resolution` before merging.
 - Branch protection is respected; do not bypass protections or merge with failing required checks unless the user explicitly accepts an allowed repository policy path.
 
 Collect enough state to merge deliberately:

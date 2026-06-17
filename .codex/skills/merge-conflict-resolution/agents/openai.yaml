@@ -1,0 +1,4 @@
+interface:
+  display_name: "Merge Conflict Resolution"
+  short_description: "Resolve local Git conflicts safely"
+  default_prompt: "Use $merge-conflict-resolution to resolve this conflict."

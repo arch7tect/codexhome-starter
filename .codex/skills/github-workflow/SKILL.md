@@ -19,6 +19,7 @@ Do not use this skill for GitLab merge requests or provider-neutral initialized 
 - Prefer draft PRs unless the user asks for a ready PR.
 - If the repository remote is not GitHub, stop and report that this skill does not apply.
 - If the current checkout is CodexHome, confirm whether the user means the CodexHome instance or an external project repository. Use this skill only for project pull requests.
+- If GitHub reports PR conflicts, use `$merge-conflict-resolution` for local conflict mechanics. This skill only handles provider inspection, push, comments, and post-resolution re-checks.
 
 ## Preflight
 
@@ -62,6 +63,8 @@ gh run list --branch <branch> --limit 10
 
 Summarize status, failing checks, and any required user decision.
 
+If `mergeStateStatus` reports conflicts or an unmergeable state, report it and switch to `$merge-conflict-resolution` before attempting any local resolution. After the branch is updated, re-run the PR view and checks commands.
+
 ## Comments
 
 Before posting comments, show or summarize the intended comment unless the user already provided exact text.
@@ -80,6 +83,7 @@ Merge only when the user explicitly asks. Before merging, verify:
 - Current local HEAD matches the PR head when local state matters.
 - Required checks and reviews are passing, or the user explicitly accepts the risk.
 - There are no unresolved requested changes.
+- GitHub does not report conflicts. If it does, resolve them through `$merge-conflict-resolution` before merging.
 - Branch protection is respected; do not bypass protections or merge with failing required checks unless the user explicitly accepts an allowed repository policy path.
 
 Prefer `gh pr merge` with the merge mode requested by the user. If no mode is requested, use the repository default or ask when ambiguous.
