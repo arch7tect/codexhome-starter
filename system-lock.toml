@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.6"
-generated_at = "2026-06-17T17:01:41Z"
+starter_version = "v0.1.7"
+generated_at = "2026-06-17T17:13:42Z"
 source = "."
 
 [[paths]]
@@ -70,6 +70,18 @@ content = "text"
 sha256 = "8e6d43c0a2398a776e9b777ebe2c3a65e5f4d14f2b483d9d95a2050448d5d3f3"
 
 [[paths]]
+path = ".codex/skills/codexhome-bootstrap/SKILL.md"
+class = "managed"
+content = "text"
+sha256 = "a860e4e9d6219398953b2c409fb0a1bd9ece5432726235b006f26019df5174cd"
+
+[[paths]]
+path = ".codex/skills/codexhome-bootstrap/agents/openai.yaml"
+class = "managed"
+content = "text"
+sha256 = "ff4404034ddaa752d641faf5c0ba672a5fb3f4ecd14963fc300c1a8d66010837"
+
+[[paths]]
 path = ".codex/skills/commit-prep/SKILL.md"
 class = "managed"
 content = "text"
@@ -85,7 +97,7 @@ sha256 = "b641be506a90d4828687be3e96c1e5ab16c52123383565f7af8fd418d34e0dcf"
 path = ".codex/skills/github-workflow/SKILL.md"
 class = "managed"
 content = "text"
-sha256 = "49ec3f25e2ab6737884a21bb443f78fe689a0173ec507bd9d11841a597380536"
+sha256 = "f26d57533025425f34973ebcddd2f324b1820e75f0933d5dd43b282263c9a7c9"
 
 [[paths]]
 path = ".codex/skills/github-workflow/agents/openai.yaml"
@@ -97,7 +109,7 @@ sha256 = "9487f5821c12699e6a2fcd0734c08ba2880ccfa6bc508db26cd5ba2634adb256"
 path = ".codex/skills/gitlab-workflow/SKILL.md"
 class = "managed"
 content = "text"
-sha256 = "053b686cdea831a230bfe98ad141f84a4117a573ae78ca0a376b993ba0f32232"
+sha256 = "fe3942568f11bfd36087bbe6728735dba8450743a4e3ad6db76fb7a2161a3d27"
 
 [[paths]]
 path = ".codex/skills/gitlab-workflow/agents/openai.yaml"
@@ -176,6 +188,18 @@ path = ".codex/skills/skill-creator/agents/openai.yaml"
 class = "managed"
 content = "text"
 sha256 = "5ce9214d17d3ffc89204752ab4622a2b3d24051af1d30794a138e32896fe32fd"
+
+[[paths]]
+path = ".codex/skills/starter-update/SKILL.md"
+class = "managed"
+content = "text"
+sha256 = "b36c6db621e5c71fbbf795cfb8e9a26ed54f5ad9e7d9c5e54edfb85457d56cc9"
+
+[[paths]]
+path = ".codex/skills/starter-update/agents/openai.yaml"
+class = "managed"
+content = "text"
+sha256 = "e5e68856d32dd9e32d463c624776b2d24665bd3a7070c1c3dce9610ba035e11e"
 
 [[paths]]
 path = ".codex/skills/system-planner/SKILL.md"
@@ -259,13 +283,13 @@ sha256 = "11e3875023ee4f28cf20b73c0d5f383814eebb0711686f1572c2a0953cddb926"
 path = "references/README.md"
 class = "managed"
 content = "text"
-sha256 = "f3e4042ec349b49e7754177549ad374c9a7e5495acd538bb9049edff7b79f69e"
+sha256 = "0269002411599e51c8160fd55d58de6b2e0a4d9cb07cd8f846af2a2fde95d847"
 
 [[paths]]
 path = "references/getting-started-with-codexhome.md"
 class = "managed"
 content = "text"
-sha256 = "a6fc6be66ff3e36471cd5c43666761dccee1d5cc674ed193bfb59ed9641950ff"
+sha256 = "41e8f127bfb8a82f434c0bf789cb5492e2271e39d34a1e87cbbd7e9ae07b2fe5"
 
 [[paths]]
 path = "references/starter-instance-sync.md"
@@ -278,6 +302,12 @@ path = "references/starter-release-procedure.md"
 class = "managed"
 content = "text"
 sha256 = "2f4f44ad3b14ec1d6fdacc2a7deaaff841d20ee75bc3475dfa7100c86f32a536"
+
+[[paths]]
+path = "references/system/git-host-workflow-policy.md"
+class = "managed"
+content = "text"
+sha256 = "898373cd0b31351bfc5704be0d690942b96b709f6cf8098ec34e2e4f90913d87"
 
 [[paths]]
 path = "references/system/scaffolds/agents-local.md"
@@ -415,7 +445,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "d971e1889720e8ac206a32441901f00025444e5df24ce7eb40eb0b5d88393c8b"
+sha256 = "b61cbeec03faedfd78d9c2fc53da00d142eae04ae46e3db4d6ccf570f17be79e"
 
 [[paths]]
 path = "uv.lock"

@@ -7,7 +7,7 @@ description: Manage generic GitHub repository workflows with gh. Use when the us
 
 Use this skill for GitHub work through `git` and `gh`: repository inspection, branch push, pull request creation, PR status, GitHub Actions checks, comments, and guarded merges.
 
-Do not use this skill for GitLab merge requests or provider-neutral initialized instance publishing.
+Do not use this skill for GitLab merge requests or provider-neutral initialized instance publishing. Read `references/system/git-host-workflow-policy.md` before acting.
 
 ## Rules
 
@@ -18,6 +18,7 @@ Do not use this skill for GitLab merge requests or provider-neutral initialized 
 - Creating a PR and merging a PR are separate operations. Merge only after a direct user request.
 - Prefer draft PRs unless the user asks for a ready PR.
 - If the repository remote is not GitHub, stop and report that this skill does not apply.
+- If the current checkout is CodexHome, confirm whether the user means the CodexHome instance or an external project repository. Use this skill only for project pull requests.
 
 ## Preflight
 
@@ -26,6 +27,8 @@ Do not use this skill for GitLab merge requests or provider-neutral initialized 
 3. Confirm a GitHub remote is present.
 4. Run `command -v gh`, `gh --version`, and `gh auth status`.
 5. Fetch remote refs before relying on local branch state when the worktree is clean enough to do so safely.
+
+If `gh` is missing or unauthenticated, stop with one actionable setup sentence. When useful, offer a Git-only fallback: push the branch and tell the user to open the pull request in GitHub.
 
 ## Push
 
@@ -73,9 +76,11 @@ Merge only when the user explicitly asks. Before merging, verify:
 
 - PR is not draft unless the user explicitly accepts that state.
 - Target branch is expected.
+- The source branch is not the protected/default branch by mistake.
 - Current local HEAD matches the PR head when local state matters.
 - Required checks and reviews are passing, or the user explicitly accepts the risk.
 - There are no unresolved requested changes.
+- Branch protection is respected; do not bypass protections or merge with failing required checks unless the user explicitly accepts an allowed repository policy path.
 
 Prefer `gh pr merge` with the merge mode requested by the user. If no mode is requested, use the repository default or ask when ambiguous.
 

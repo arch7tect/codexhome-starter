@@ -1,5 +1,5 @@
 schema_version = 1
-starter_version = "v0.1.6"
+starter_version = "v0.1.7"
 description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
 default_class = "reserved_user"
 prune = "manual"
@@ -111,6 +111,12 @@ content = "text"
 note = "Generic workflow skill."
 
 [[paths]]
+path = ".codex/skills/codexhome-bootstrap/**"
+class = "managed"
+content = "text"
+note = "Generic CodexHome instance bootstrap workflow skill."
+
+[[paths]]
 path = ".codex/skills/github-workflow/**"
 class = "managed"
 content = "text"
@@ -157,6 +163,12 @@ path = ".codex/skills/skill-creator/**"
 class = "managed"
 content = "text"
 note = "Generic skill authoring skill."
+
+[[paths]]
+path = ".codex/skills/starter-update/**"
+class = "managed"
+content = "text"
+note = "Generic starter update workflow skill."
 
 [[paths]]
 path = ".codex/skills/system-planner/**"

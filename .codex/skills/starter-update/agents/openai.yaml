@@ -1,0 +1,4 @@
+interface:
+  display_name: "Starter Update"
+  short_description: "Update from starter releases"
+  default_prompt: "Use $starter-update to update this CodexHome instance from the starter."

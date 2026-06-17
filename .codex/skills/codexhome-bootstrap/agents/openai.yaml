@@ -1,0 +1,4 @@
+interface:
+  display_name: "CodexHome Bootstrap"
+  short_description: "Initialize a CodexHome instance"
+  default_prompt: "Use $codexhome-bootstrap to initialize this CodexHome instance."

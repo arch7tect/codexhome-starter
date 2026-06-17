@@ -7,7 +7,7 @@ description: Manage generic GitLab repository workflows with glab. Use when the 
 
 Use this skill for GitLab work through `git` and `glab`: repository inspection, branch push, merge request creation, MR status, pipeline checks, comments, and guarded merges.
 
-Do not use this skill for GitHub pull requests or provider-neutral initialized instance publishing.
+Do not use this skill for GitHub pull requests or provider-neutral initialized instance publishing. Read `references/system/git-host-workflow-policy.md` before acting.
 
 ## Rules
 
@@ -18,6 +18,7 @@ Do not use this skill for GitHub pull requests or provider-neutral initialized i
 - Creating an MR and merging an MR are separate operations. Merge only after a direct user request.
 - Prefer draft MRs unless the user asks for a ready MR.
 - If the repository remote is not GitLab, stop and report that this skill does not apply.
+- If the current checkout is CodexHome, confirm whether the user means the CodexHome instance or an external project repository. Use this skill only for project merge requests.
 
 ## Preflight
 
@@ -26,6 +27,8 @@ Do not use this skill for GitHub pull requests or provider-neutral initialized i
 3. Confirm a GitLab remote is present.
 4. Run `command -v glab`, `glab --version`, and `glab auth status`.
 5. Fetch remote refs before relying on local branch state when the worktree is clean enough to do so safely.
+
+If `glab` is missing or unauthenticated, stop with one actionable setup sentence. When useful, offer a Git-only fallback: push the branch and tell the user to open the merge request in GitLab.
 
 ## Push
 
@@ -74,9 +77,11 @@ Merge only when the user explicitly asks. Before merging, verify:
 
 - MR is not draft unless the user explicitly accepts that state.
 - Target branch is expected.
+- The source branch is not the protected/default branch by mistake.
 - Current local HEAD matches the MR source branch when local state matters.
 - Required pipelines and approvals are passing, or the user explicitly accepts the risk.
 - Unresolved discussions are handled or explicitly accepted.
+- Branch protection is respected; do not bypass protections or merge with failing required checks unless the user explicitly accepts an allowed repository policy path.
 
 Use `glab mr merge` with the merge mode requested by the user. If no mode is requested, use the repository default or ask when ambiguous.
 

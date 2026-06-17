@@ -35,6 +35,8 @@ Publish this initialized instance to this private Git remote: <git-url>.
 
 Use a GitHub, GitLab, or other Git remote URL. The remote repository should already exist, be private, and be empty.
 
+This publishes your CodexHome instance. It is different from opening a pull request or merge request for a project.
+
 ## Add Projects
 
 To add a codebase you want the agent to work with, say:
@@ -77,6 +79,8 @@ The agent should read the relevant project profile, use the matching skill, insp
 
 Generic GitHub and GitLab workflows are available out of the box.
 
+Use these phrases when you are inside an external project repository or when you name the project. They are for project changes, not for publishing the CodexHome instance.
+
 For GitHub, say:
 
 ```text
@@ -102,6 +106,8 @@ Check the GitLab merge request status and pipeline.
 ```
 
 The agent should use the repository remote to choose GitHub or GitLab behavior, avoid exposing tokens, and ask before merging.
+
+These workflows need the matching local Git host tool to be installed and authenticated. If it is missing, the agent should say what to configure and offer a safe fallback such as pushing the branch.
 
 ## Investigate An Incident
 
@@ -182,5 +188,7 @@ Use these phrases as your main control surface:
 - `Update this instance from the latest starter release.`
 - `Create a GitHub pull request for the current branch.`
 - `Create a GitLab merge request for the current branch.`
+- `Check the GitHub pull request status and CI.`
+- `Check the GitLab merge request status and pipeline.`
 
 The system is working when you can stay at the level of intent and the agent can explain the plan, safety checks, changed files, and verification results.
