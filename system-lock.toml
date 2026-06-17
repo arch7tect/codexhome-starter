@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.0"
-generated_at = "2026-06-17T11:13:20Z"
+starter_version = "v0.1.1"
+generated_at = "2026-06-17T11:32:19Z"
 source = "."
 
 [[paths]]
@@ -44,6 +44,18 @@ path = ".codex/skills/ci-fixer/agents/openai.yaml"
 class = "managed"
 content = "text"
 sha256 = "ba2633b24e73400538b2d3fd3c1968e0851e04428d39c84f51c09d407415b5e3"
+
+[[paths]]
+path = ".codex/skills/claude-code-consult/SKILL.md"
+class = "managed"
+content = "text"
+sha256 = "a3e668ee59441baa6c83e37e4d3b709b4bc14d08806ffd79ff558d1b8a0c0d01"
+
+[[paths]]
+path = ".codex/skills/claude-code-consult/agents/openai.yaml"
+class = "managed"
+content = "text"
+sha256 = "841309ca3474d7e6ff181f6571a08d1f89385d0e264b51c8de0b1e1f2de34523"
 
 [[paths]]
 path = ".codex/skills/code-reviewer/SKILL.md"
@@ -325,7 +337,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "22929c732fc2b74554e7aa74370d128a3eb2418b56ce080008a02323eb814750"
+sha256 = "0bcdf2e775e2caa730833a505bbf1aa4cc0d297a9336e9a2e16eb7a2fdcbf1a3"
 
 [[paths]]
 path = "uv.lock"

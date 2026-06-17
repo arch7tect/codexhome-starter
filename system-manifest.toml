@@ -1,5 +1,5 @@
 schema_version = 1
-starter_version = "v0.1.0"
+starter_version = "v0.1.1"
 description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
 default_class = "reserved_user"
 prune = "manual"
@@ -89,6 +89,12 @@ path = ".codex/skills/ci-fixer/**"
 class = "managed"
 content = "text"
 note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/claude-code-consult/**"
+class = "managed"
+content = "text"
+note = "Generic bounded Claude Code second-opinion workflow skill."
 
 [[paths]]
 path = ".codex/skills/code-reviewer/**"

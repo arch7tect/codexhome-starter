@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Code Consult"
+  short_description: "Ask local Claude Code for a bounded review"
+  default_prompt: "Use $claude-code-consult to ask Claude Code for a bounded second opinion."
