@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.5"
-generated_at = "2026-06-17T16:52:23Z"
+starter_version = "v0.1.6"
+generated_at = "2026-06-17T17:01:41Z"
 source = "."
 
 [[paths]]
@@ -80,6 +80,30 @@ path = ".codex/skills/commit-prep/agents/openai.yaml"
 class = "managed"
 content = "text"
 sha256 = "b641be506a90d4828687be3e96c1e5ab16c52123383565f7af8fd418d34e0dcf"
+
+[[paths]]
+path = ".codex/skills/github-workflow/SKILL.md"
+class = "managed"
+content = "text"
+sha256 = "49ec3f25e2ab6737884a21bb443f78fe689a0173ec507bd9d11841a597380536"
+
+[[paths]]
+path = ".codex/skills/github-workflow/agents/openai.yaml"
+class = "managed"
+content = "text"
+sha256 = "9487f5821c12699e6a2fcd0734c08ba2880ccfa6bc508db26cd5ba2634adb256"
+
+[[paths]]
+path = ".codex/skills/gitlab-workflow/SKILL.md"
+class = "managed"
+content = "text"
+sha256 = "053b686cdea831a230bfe98ad141f84a4117a573ae78ca0a376b993ba0f32232"
+
+[[paths]]
+path = ".codex/skills/gitlab-workflow/agents/openai.yaml"
+class = "managed"
+content = "text"
+sha256 = "47b7139c451fdc3d869c0789de13bcd1cf37033cad8f7d7cd8dd235a22785d30"
 
 [[paths]]
 path = ".codex/skills/implementation-runner/SKILL.md"
@@ -241,7 +265,7 @@ sha256 = "f3e4042ec349b49e7754177549ad374c9a7e5495acd538bb9049edff7b79f69e"
 path = "references/getting-started-with-codexhome.md"
 class = "managed"
 content = "text"
-sha256 = "1e34f0d836fdaa44bf3b6afeef2f586b4558da1ffb528eb8deb7508ace9a802a"
+sha256 = "a6fc6be66ff3e36471cd5c43666761dccee1d5cc674ed193bfb59ed9641950ff"
 
 [[paths]]
 path = "references/starter-instance-sync.md"
@@ -391,7 +415,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "8c88eceef174598df2408127a6cbff57c3f091e6481261458595975c19ec5c84"
+sha256 = "d971e1889720e8ac206a32441901f00025444e5df24ce7eb40eb0b5d88393c8b"
 
 [[paths]]
 path = "uv.lock"

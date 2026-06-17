@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Workflow"
+  short_description: "Manage GitHub PRs and checks"
+  default_prompt: "Use $github-workflow to manage this GitHub repository workflow."

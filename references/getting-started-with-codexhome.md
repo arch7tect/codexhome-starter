@@ -1,191 +1,186 @@
 # Getting Started With CodexHome
 
-This guide describes the intended user journey from a clean checkout to useful repository memory.
+This guide is for the person using CodexHome with an agent. Work by use case: say what outcome you want, review the plan, and approve the next step when the agent asks.
 
-CodexHome is not a project repository. It is the local operating context for agent-assisted work: global rules, skills, project profiles, references, and the LLM wiki lifecycle.
+CodexHome is not an application project. It is the operating context for agent-assisted work: reusable instructions, skills, project profiles, references, and repository memory.
 
 ## Mental Model
 
-Keep system mechanics separate from local context:
+CodexHome has two layers:
 
-- System mechanics: repeatable workflows, safety rules, validation scripts, and lifecycle procedures.
-- Local context: project profiles, durable decisions, known traps, and curated wiki pages produced by real work.
+- Starter: generic system mechanics that can be updated for every installation.
+- Instance: your private working memory, project profiles, local notes, and organization-specific knowledge.
 
-The repository should teach a new user what to do next at each stage without requiring them to understand every directory first.
+Your job is to decide what should happen and what is safe to keep. The agent's job is to run the right workflow, use the right skill, avoid publishing local secrets, and explain what changed.
 
-For clean distribution and safe upgrades, treat the reusable starter and each populated local repository as different roles. The starter owns generic system mechanics and generic knowledge; an instance owns local projects, organization-specific skills, raw sessions, incidents, and curated project memory. See [Starter And Instance Sync Plan](starter-instance-sync.md) for the update model.
+## First Day
 
-## First Run
+After cloning the starter, say:
 
-1. Clone the clean starter repository for a new installation, or use this populated repository only when intentionally working in this instance.
-2. Ask Codex to initialize the instance, or run `uv run python scripts/bootstrap_instance.py`.
-3. Fill `PROJECTS_ROOT` in `.env` if it was not provided during bootstrap.
-4. Read `AGENTS.md`.
-5. Read `AGENTS.local.md`.
-6. Read `README.local.md`.
-7. Read this guide.
-8. Read `projects/README.md`.
-9. Read `projects/index.local.md`.
-10. Read `references/index.local.md`.
-11. Publish the initialized instance to an empty private Git remote.
-12. Add or update project profiles for the repositories you will work on.
-
-Do not commit `.env`, raw logs, raw session notes, or developer-specific absolute home-directory paths.
-
-Bootstrap creates local scaffold files without overwriting existing local files. Use `AGENTS.local.md` and `README.local.md` for committed instance-specific rules and setup notes that should not become starter-managed system content. Keep local secret values and developer paths in `.env`, not in local Markdown files.
-
-When an agent handles the initialization request, it should run the bootstrap command and report the created scaffolds. Bootstrap sets `CODEX_HOME` to the current checkout. The agent must not infer `PROJECTS_ROOT`; it should write `PROJECTS_ROOT` only when the user explicitly provides the desired value.
-
-Use `uv run python scripts/bootstrap_instance.py --projects-root <path>` when the user provides `PROJECTS_ROOT` before the first bootstrap run. If `PROJECTS_ROOT` remains a placeholder after bootstrap, the agent should ask which project root to use. When the user answers, run `uv run python scripts/bootstrap_instance.py --env-only --projects-root <path>` so the dirty scaffold worktree does not block the local `.env` update.
-
-## Publish Instance
-
-After bootstrap, publish the initialized instance to a private repository owned by the user or organization. GitHub and GitLab use the same provider-neutral workflow: create an empty private remote first, then pass its Git URL to the publish command.
-
-Preview the plan:
-
-```bash
-uv run python scripts/publish_instance.py --instance-remote <git-url> --dry-run
+```text
+Initialize this CodexHome instance.
 ```
 
-Commit and push the initialized instance:
+If you already know where your project checkouts live, say:
 
-```bash
-uv run python scripts/publish_instance.py --instance-remote <git-url> --push
+```text
+Initialize this CodexHome instance. Use this projects root: <path>.
 ```
 
-The command refuses to publish when `.env` is tracked or staged, when unexpected files are dirty, when scaffold files contain developer home-directory paths, or when `origin` already points to a non-starter repository. If `origin` points to `codexhome-starter`, it is renamed to `starter`; the private instance remote becomes `origin`.
+When the instance is initialized, publish it to your private Git repository:
+
+```text
+Publish this initialized instance to this private Git remote: <git-url>.
+```
+
+Use a GitHub, GitLab, or other Git remote URL. The remote repository should already exist, be private, and be empty.
 
 ## Add Projects
 
-For each external project:
-
-1. Add or update `projects/<project>.md`.
-2. Use variables defined by `.env.template` or local instance instructions instead of local absolute paths.
-3. Record repository URLs, default branch, setup commands, test commands, and important related projects.
-4. Link durable background material in `references/` only when the material remains useful outside one task.
-5. Link wiki context packs only when a reusable cross-session context exists.
-
-Project profiles should answer: where is the project, how do I safely inspect it, how do I verify changes, and what should I not forget?
-
-## Solve Problems
-
-When starting work:
-
-1. Read `AGENTS.md`.
-2. Read the relevant project profile.
-3. Use task-specific skills from `.codex/skills/`.
-4. Use `wiki/index.md` when the task involves cross-session context, lifecycle validation, long agent runs, or repository memory.
-5. Inspect source files before editing code.
-6. Run the smallest meaningful verification before broader checks.
-
-Use `tmp/` for ad hoc raw artifacts while exploring. Move only curated, sanitized outputs into durable repository locations.
-
-## Close A Session
-
-When the user asks to save, preserve, wrap up, or close a session:
-
-1. Capture raw local notes under `wiki/sessions/`.
-2. Treat raw notes as low-trust input.
-3. Promote only durable knowledge into committed memory, and only when the user asked for memory updates or approval is clear.
-4. Report raw capture and durable promotion separately, including `none` when no durable memory was created.
-
-Expected report shape:
+To add a codebase you want the agent to work with, say:
 
 ```text
-Raw capture: wiki/sessions/<date>-<slug>.md
-Durable memory: <path> or none
-Verification: <commands>
-Commit: yes/no
-Push: yes/no
+Add this project to CodexHome: <project name>, repository <url>, local path <path>.
 ```
 
-## Extract Knowledge
-
-After one or more solved problems, decide what should become durable:
-
-- Global rule: update `AGENTS.md`.
-- Repeatable procedure: update or create a skill under `.codex/skills/`.
-- Project-specific path, command, or relationship: update `projects/<project>.md`.
-- Long-lived background material or decision support: update `references/`.
-- Cross-session context, known traps, or wiki lifecycle material: update `wiki/`.
-- Incident evidence: create curated incident Markdown under `incidents/<date>-<slug>/`.
-
-Do not turn every session note into memory. Durable memory should reduce future work or prevent future mistakes.
-
-## LLM Wiki Flow
-
-Use the LLM wiki when a task benefits from curated cross-session context. The starter includes the generic lifecycle mechanics; each populated instance owns its raw notes, concepts, context packs, and decisions.
-
-Typical flow:
+If you want the agent to inspect the project before saving a profile, say:
 
 ```text
-wiki/sessions/      raw local capture, ignored by git
-wiki/drafts/        proposed promotion, reviewable
-wiki/concepts/      approved stable concepts
-wiki/context-packs/ approved task-routing context
-wiki/decisions/     approved decision records
+Inspect this project and create a project profile for future work: <path>.
 ```
 
-Run these checks before treating wiki content as ready:
+The project profile should make future work easier: where the code lives, how to update it, how to run checks, and what risks or conventions matter.
 
-```bash
-uv run python scripts/wiki_lint.py
-uv run python scripts/wiki_lint.py --profile autonomous
-uv run python scripts/wiki_status.py
+## Work On A Task
+
+For normal engineering work, say the outcome and the project:
+
+```text
+In <project>, fix <problem> and verify it.
 ```
 
-When checking lint behavior itself:
+For a planned change:
 
-```bash
-uv run python scripts/tests/test_wiki_lint.py
+```text
+In <project>, design the change for <feature or refactor> before editing code.
 ```
 
-## Temporary Artifacts
+For a review:
 
-Use these locations:
+```text
+Review the current changes in <project> for bugs and missing tests.
+```
 
-- `tmp/`: ad hoc local collection before a case exists.
-- `incidents/<case>/artifacts/`: raw local incident artifacts for a specific case.
-- `wiki/sessions/`: raw local session notes.
+The agent should read the relevant project profile, use the matching skill, inspect the code before editing, run suitable checks, and report what changed.
 
-These raw-artifact locations are ignored by git. Curated records should be moved into tracked Markdown only after review and sanitization.
+## GitHub And GitLab
+
+Generic GitHub and GitLab workflows are available out of the box.
+
+For GitHub, say:
+
+```text
+Create a GitHub pull request for the current branch.
+```
+
+or:
+
+```text
+Check the GitHub pull request status and CI.
+```
+
+For GitLab, say:
+
+```text
+Create a GitLab merge request for the current branch.
+```
+
+or:
+
+```text
+Check the GitLab merge request status and pipeline.
+```
+
+The agent should use the repository remote to choose GitHub or GitLab behavior, avoid exposing tokens, and ask before merging.
+
+## Investigate An Incident
+
+For an incident, give the project or system name and the symptom:
+
+```text
+Investigate this incident: <link, id, screenshot, or symptom>.
+```
+
+If there are logs or artifacts:
+
+```text
+Investigate this incident using these artifacts: <paths or links>.
+```
+
+The agent should create or use a case workspace, keep raw artifacts out of committed memory, collect evidence, and produce a concise report with root cause, impact, and next steps.
+
+## Save Knowledge
+
+After a useful task, ask the agent to preserve what should help future work:
+
+```text
+Save the durable learnings from this session.
+```
+
+If you only want a raw capture:
+
+```text
+Close this session and save a raw note.
+```
+
+The agent should separate raw notes from durable memory. Not every session should become permanent knowledge.
 
 ## Update From Starter
 
-Existing instances should receive future starter improvements through an explicit sync workflow, not by rebasing onto starter history.
+When you want the latest generic CodexHome improvements, say:
 
-Starter-owned updates can include generic scripts, generic skills, onboarding documents, validation rules, and generic system knowledge under managed namespaces such as `references/system/` or `wiki/system/`. User-owned paths such as `projects/`, `wiki/sessions/`, `wiki/drafts/`, `wiki/concepts/`, `wiki/context-packs/`, `wiki/decisions/`, `wiki/fixtures/`, `wiki/validation-runs/`, and `incidents/` must remain reserved for the instance.
+```text
+Update this instance from the latest starter release.
+```
 
-Before applying starter updates:
+If you want to see the impact first, say:
 
-1. Make sure the instance worktree is clean.
-2. Run the sync check or dry-run command.
-3. Review safe updates, new files, skipped user paths, and conflicts.
-4. Resolve conflicts explicitly instead of overwriting local memory.
-5. Run validation commands.
-6. Commit the starter update as one reviewable change.
+```text
+Show me the starter update plan before applying it.
+```
 
-The sync design is defined in [Starter And Instance Sync Plan](starter-instance-sync.md). Use `scripts/sync_system.py --check`, `--dry-run`, `--adopt`, and `--apply` for starter updates. The `--allow-local-adopt` and `--allow-local-apply` flags are only for local bootstrap or development validation; normal updates should use a release tag or a full pinned commit.
+The agent should protect your instance-owned projects, wiki notes, incidents, and local context while applying starter-owned updates.
 
-Starter maintainers should use [Starter Release Procedure](starter-release-procedure.md) before tagging a clean release.
+## Publish Or Push Changes
 
-## What To Do Next
+To push your private instance after ordinary local changes, say:
 
-After a clean checkout:
+```text
+Commit and push the current intended CodexHome changes.
+```
 
-1. Run `uv run python scripts/bootstrap_instance.py`.
-2. Configure `PROJECTS_ROOT` in `.env`, or run `uv run python scripts/bootstrap_instance.py --env-only --projects-root /path/to/projects` after bootstrap.
-3. Publish the initialized instance with `uv run python scripts/publish_instance.py --instance-remote <git-url> --push`.
-4. Add the first project profile.
-5. Solve one small task with the agent.
-6. Close the session and confirm a raw note appears under `wiki/sessions/`.
-7. Promote one durable learning only if it will help future work.
-8. Run checks.
-9. Commit only curated changes.
+To publish a newly initialized instance, use the first-day phrase instead:
 
-The system is working when the user can always answer three questions:
+```text
+Publish this initialized instance to this private Git remote: <git-url>.
+```
 
-- Where should this information go?
-- Is it raw local input or durable committed memory?
-- What check proves it is safe enough for the next step?
+The agent should never publish `.env`, raw session notes, temporary files, or local-only artifacts.
+
+## What To Ask Next
+
+Use these phrases as your main control surface:
+
+- `Initialize this CodexHome instance.`
+- `Publish this initialized instance to this private Git remote: <git-url>.`
+- `Add this project to CodexHome: <name>, repository <url>, local path <path>.`
+- `In <project>, fix <problem> and verify it.`
+- `Review the current changes in <project>.`
+- `Investigate this incident: <details>.`
+- `Save the durable learnings from this session.`
+- `Close this session and save a raw note.`
+- `Update this instance from the latest starter release.`
+- `Create a GitHub pull request for the current branch.`
+- `Create a GitLab merge request for the current branch.`
+
+The system is working when you can stay at the level of intent and the agent can explain the plan, safety checks, changed files, and verification results.

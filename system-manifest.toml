@@ -1,5 +1,5 @@
 schema_version = 1
-starter_version = "v0.1.5"
+starter_version = "v0.1.6"
 description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
 default_class = "reserved_user"
 prune = "manual"
@@ -109,6 +109,18 @@ path = ".codex/skills/commit-prep/**"
 class = "managed"
 content = "text"
 note = "Generic workflow skill."
+
+[[paths]]
+path = ".codex/skills/github-workflow/**"
+class = "managed"
+content = "text"
+note = "Generic GitHub pull request and checks workflow skill."
+
+[[paths]]
+path = ".codex/skills/gitlab-workflow/**"
+class = "managed"
+content = "text"
+note = "Generic GitLab merge request and pipeline workflow skill."
 
 [[paths]]
 path = ".codex/skills/implementation-runner/**"
