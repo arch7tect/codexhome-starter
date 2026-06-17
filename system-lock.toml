@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.12"
-generated_at = "2026-06-17T21:17:52Z"
+starter_version = "v0.1.13"
+generated_at = "2026-06-17T21:27:24Z"
 source = "."
 
 [[paths]]
@@ -271,7 +271,7 @@ sha256 = "3c4997f0c9e444ea8cda6ea817ec8b5228d0aef854dc52885fa03eb6299eef95"
 path = "README.md"
 class = "managed"
 content = "text"
-sha256 = "12287bf90db9caf88e3c2fb0cc66f5999f51f4a3f5da6fd4689ae7e5e7d63536"
+sha256 = "a228798e37e750b5576807e0dcb27b02b25ce87edd1aa3a72ec4e60e79a761a8"
 
 [[paths]]
 path = "incidents/README.md"
@@ -301,7 +301,7 @@ sha256 = "0269002411599e51c8160fd55d58de6b2e0a4d9cb07cd8f846af2a2fde95d847"
 path = "references/getting-started-with-codexhome.md"
 class = "managed"
 content = "text"
-sha256 = "d6e002a9457273549acc2f662c22d77f48602b2a11186637c7bb80a3d976b594"
+sha256 = "94e779e9d268f2aad5ba8e8c59799a28e826b01757ed2f7029bd1cc7fb4f6aa5"
 
 [[paths]]
 path = "references/starter-instance-sync.md"
@@ -457,7 +457,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "fadb0f4d23f87cb326430f293f7afbd002fd01a74e6e36464b374f471b9f0665"
+sha256 = "9fb2b4e55c560eff3c4c1da9e74285cbcc4a3586c49008f214fcaa5d9ebb0244"
 
 [[paths]]
 path = "uv.lock"

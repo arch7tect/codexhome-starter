@@ -2,7 +2,7 @@
 
 This guide is for the person using CodexHome with an agent. Work by use case: say what outcome you want, review the plan, and approve the next step when the agent asks.
 
-CodexHome is not an application project. It is the operating context for agent-assisted work: reusable instructions, skills, project profiles, references, and repository memory.
+CodexHome is not an application project. It is the operating context for agent-assisted work: reusable instructions, skills, project profiles, wiki notes, references, and repository memory.
 
 ## Mental Model
 
@@ -143,6 +143,30 @@ Investigate this incident using these artifacts: <paths or links>.
 
 The agent should create or use a case workspace, keep raw artifacts out of committed memory, collect evidence, and produce a concise report with root cause, impact, and next steps.
 
+## Build The Wiki
+
+The wiki is where durable, reusable knowledge becomes linked context instead of scattered session notes. Use it for concepts, decisions, workflows, project maps, and lessons that should help future work.
+
+After meaningful project work, say:
+
+```text
+Extract durable wiki knowledge from this session.
+```
+
+For a known topic, say:
+
+```text
+Create or update a wiki page for <topic>.
+```
+
+To keep the knowledge base healthy, say:
+
+```text
+Review the wiki for stale, duplicate, or conflicting pages.
+```
+
+The agent should keep raw notes separate from durable wiki pages, link related pages, verify wiki health, and ask before promoting uncertain knowledge.
+
 ## Save Knowledge
 
 After a useful task, ask the agent to preserve what should help future work:
@@ -158,6 +182,8 @@ Close this session and save a raw note.
 ```
 
 The agent should separate raw notes from durable memory. Not every session should become permanent knowledge.
+
+For structured, reusable knowledge that should become linked context, use the wiki workflow above.
 
 ## Update From Starter
 
@@ -201,6 +227,9 @@ Use these phrases as your main control surface:
 - `In <project>, fix <problem> and verify it.`
 - `Review the current changes in <project>.`
 - `Investigate this incident: <details>.`
+- `Extract durable wiki knowledge from this session.`
+- `Create or update a wiki page for <topic>.`
+- `Review the wiki for stale, duplicate, or conflicting pages.`
 - `Save the durable learnings from this session.`
 - `Close this session and save a raw note.`
 - `Update this instance from the latest starter release.`
