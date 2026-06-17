@@ -82,6 +82,30 @@ Resolve the merge conflicts for this project branch.
 
 Expect the agent to choose the right workflow, explain the plan, avoid unrelated changes, run suitable checks, and report what changed.
 
+## Build The Wiki
+
+The wiki is where durable, reusable knowledge becomes linked context instead of scattered session notes. Use it for concepts, decisions, workflows, project maps, and lessons that should help future work.
+
+After meaningful project work, say:
+
+```text
+Extract durable wiki knowledge from this session.
+```
+
+For a known topic, say:
+
+```text
+Create or update a wiki page for <topic>.
+```
+
+To keep the knowledge base healthy, say:
+
+```text
+Review the wiki for stale, duplicate, or conflicting pages.
+```
+
+Expect the agent to keep raw notes separate from durable wiki pages, link related pages, verify wiki health, and ask before promoting uncertain knowledge.
+
 ## Preserve Knowledge
 
 When a session produced reusable knowledge, say:
