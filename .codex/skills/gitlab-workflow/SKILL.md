@@ -27,12 +27,28 @@ Do not use this skill for GitHub pull requests or provider-neutral initialized i
 3. Confirm a GitLab remote is present.
 4. Run `command -v glab`, `glab --version`, and `glab auth status`.
 5. Fetch remote refs before relying on local branch state when the worktree is clean enough to do so safely.
+6. Determine the target branch from the user request or the upstream default branch. If the target equals the source branch, stop and ask for the intended target.
 
 If `glab` is missing or unauthenticated, stop with one actionable setup sentence. When useful, offer a Git-only fallback: push the branch and tell the user to open the merge request in GitLab.
+
+## Branch And Commit
+
+For a direct request to push without asking for an MR, prefer the current project branch and its upstream. Create a new branch only when the user asks for an MR or new branch, the current branch is unsuitable, or pushing the current branch would mix unrelated work.
+
+Before committing:
+
+```bash
+git diff --stat
+git status --short
+```
+
+Use the repository's commit message convention. If none is known, use a short one-line message without tool attribution.
 
 ## Push
 
 For a push request, push the current branch to the expected GitLab remote after verifying the branch and intended commits. If the branch has no upstream, use `git push -u origin <branch>`.
+
+If `glab` auth is configured for a different GitLab host but plain Git push to `origin` works and no MR/API action is required, proceed with Git push and report that API actions were skipped because CLI auth is not configured for the remote host.
 
 ## Create Or Update MR
 
@@ -41,6 +57,8 @@ Before creating an MR, check whether one already exists for the current branch:
 ```bash
 glab mr list --source-branch <branch> --output json
 ```
+
+If an MR already exists, report its URL and do not create a duplicate.
 
 Create a draft MR unless the user requested ready for review:
 
@@ -57,6 +75,7 @@ Use:
 ```bash
 glab mr view <iid-or-branch> --output json
 glab mr view <iid-or-branch> --comments
+glab mr view <iid-or-branch> --unresolved
 glab mr diff <iid-or-branch>
 glab ci status --branch <branch> --output json
 ```
@@ -81,10 +100,23 @@ Merge only when the user explicitly asks. Before merging, verify:
 - Current local HEAD matches the MR source branch when local state matters.
 - Required pipelines and approvals are passing, or the user explicitly accepts the risk.
 - Unresolved discussions are handled or explicitly accepted.
+- GitLab does not report conflicts.
 - Branch protection is respected; do not bypass protections or merge with failing required checks unless the user explicitly accepts an allowed repository policy path.
 
-Use `glab mr merge` with the merge mode requested by the user. If no mode is requested, use the repository default or ask when ambiguous.
+Collect enough state to merge deliberately:
+
+```bash
+glab mr view <iid-or-branch> --output json
+glab mr view <iid-or-branch> --unresolved
+glab mr approvers <iid-or-branch>
+glab ci status --branch <branch> --output json
+git fetch origin
+git status --short
+git rev-parse HEAD
+```
+
+Use `glab mr merge` with the current source SHA and the merge mode requested by the user. If no mode is requested, use the repository default or ask when ambiguous.
 
 ## Final Response
 
-Report the branch, MR URL, pipeline status, action taken, and any remaining risk. Keep secrets and tokens out of the response.
+Keep the final response short. Report the branch, MR URL, draft or ready state, commit hash if created, pipeline status, merge result if merged, skipped checks or blockers, and any remaining risk. Keep secrets and tokens out of the response.

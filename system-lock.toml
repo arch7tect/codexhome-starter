@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.7"
-generated_at = "2026-06-17T17:13:42Z"
+starter_version = "v0.1.8"
+generated_at = "2026-06-17T17:23:54Z"
 source = "."
 
 [[paths]]
@@ -109,7 +109,7 @@ sha256 = "9487f5821c12699e6a2fcd0734c08ba2880ccfa6bc508db26cd5ba2634adb256"
 path = ".codex/skills/gitlab-workflow/SKILL.md"
 class = "managed"
 content = "text"
-sha256 = "fe3942568f11bfd36087bbe6728735dba8450743a4e3ad6db76fb7a2161a3d27"
+sha256 = "8bd6cda06b9de61fa8a4eff7677cf6608ecd99f0043ae94d6dad63e86f834365"
 
 [[paths]]
 path = ".codex/skills/gitlab-workflow/agents/openai.yaml"
@@ -445,7 +445,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "b61cbeec03faedfd78d9c2fc53da00d142eae04ae46e3db4d6ccf570f17be79e"
+sha256 = "0576e7faaee8b684e174e0298606259769b1195fc23dfa61c3ddc2875877516f"
 
 [[paths]]
 path = "uv.lock"

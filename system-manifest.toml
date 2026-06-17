@@ -1,5 +1,5 @@
 schema_version = 1
-starter_version = "v0.1.7"
+starter_version = "v0.1.8"
 description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
 default_class = "reserved_user"
 prune = "manual"
