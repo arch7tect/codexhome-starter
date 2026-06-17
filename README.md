@@ -1,105 +1,111 @@
 # CodexHome
 
-This repository stores shared Codex working memory: global instructions, reusable skills, project profiles, and long-lived references.
+CodexHome is a personal operating context for agent-assisted engineering work. It stores reusable instructions, skills, project profiles, references, wiki notes, and the memory that helps an agent work consistently across repositories.
 
-## After Clone
+You normally use this repository by talking to an agent. You should not need to run setup scripts by hand.
 
-Initialize local scaffolds with one command:
+## What To Do After Clone
 
-```bash
-uv run python scripts/bootstrap_instance.py
-```
-
-This creates local files such as `.env`, `AGENTS.local.md`, `README.local.md`, `projects/_template.md`, `projects/index.local.md`, `references/index.local.md`, and `wiki/index.md` without overwriting existing local files.
-
-You can also start Codex in this checkout and ask:
+Open this checkout in your agent environment and say:
 
 ```text
 Initialize this CodexHome instance.
 ```
 
-Agents should satisfy that request by running `uv run python scripts/bootstrap_instance.py` from the repository root. Bootstrap sets `CODEX_HOME` to the current checkout path. Agents must not infer `PROJECTS_ROOT`; they should pass `--projects-root <path>` only when the user explicitly provides that value.
+If you already know where your project checkouts live, say:
 
-After bootstrap, review `.env` and fill in `PROJECTS_ROOT` if it was not provided:
-
-```bash
-CODEX_HOME=/current/checkout/path
-PROJECTS_ROOT=/path/to/projects
+```text
+Initialize this CodexHome instance. Use this projects root: <path>.
 ```
 
-You can provide `PROJECTS_ROOT` during bootstrap:
+The agent should create the local scaffold files, keep private paths in ignored local config, and tell you what still needs your attention.
 
-```bash
-uv run python scripts/bootstrap_instance.py --projects-root /path/to/projects
+## Publish Your Instance
+
+After initialization, create an empty private repository on your preferred host. Then say:
+
+```text
+Publish this initialized instance to this private remote: <remote-url>.
 ```
 
-If bootstrap already ran and the scaffold files are still uncommitted, update only `.env`:
+The agent should keep the clean starter source separate from your private instance, publish only safe initialized files, and refuse to publish local secrets or raw session notes.
 
-```bash
-uv run python scripts/bootstrap_instance.py --env-only --projects-root /path/to/projects
+## Add Projects
+
+To make a project available for future work, say:
+
+```text
+Add this project to CodexHome: <project name>, repository <url>, local path <path>.
 ```
 
-Review `git status` and commit the initialized local scaffolds when they look right.
+If the project is unfamiliar, ask the agent to inspect it first:
 
-## Publish Initialized Instance
-
-Create an empty private repository on GitHub, GitLab, or another Git host. Then publish this initialized instance to that remote:
-
-```bash
-uv run python scripts/publish_instance.py \
-  --instance-remote git@github.com:user/codexhome-instance.git \
-  --dry-run
+```text
+Inspect this project and create a project profile for future work: <path>.
 ```
 
-When the plan looks right, push it:
+Project profiles help the agent remember where code lives, how to update it, how to verify changes, and what conventions matter.
 
-```bash
-uv run python scripts/publish_instance.py \
-  --instance-remote git@github.com:user/codexhome-instance.git \
-  --push
+## Work With Projects
+
+Once a project is registered, stay at the level of intent:
+
+```text
+In <project>, fix <problem> and verify it.
 ```
 
-Use the same command shape for GitLab:
-
-```bash
-uv run python scripts/publish_instance.py \
-  --instance-remote git@gitlab.com:group/codexhome-instance.git \
-  --push
+```text
+Review the current changes in <project> for bugs and missing tests.
 ```
 
-The publish command keeps the starter remote as `starter`, makes the private instance repository `origin`, commits only initialized scaffold files plus `system-lock.toml`, and refuses to publish `.env`.
-
-## Start Here
-
-New users should read [Getting Started With CodexHome](references/getting-started-with-codexhome.md) after cloning the repository and running bootstrap.
-
-Clean starter distribution and populated instance updates are described in [Starter And Instance Sync Plan](references/starter-instance-sync.md).
-
-## Local Setup
-
-Fill in developer-local paths in `.env`:
-
-```bash
-CODEX_HOME=/current/checkout/path
-PROJECTS_ROOT=/path/to/projects
+```text
+Create a GitHub pull request for the current branch.
 ```
 
-`.env` is ignored by git and must not be committed. Keep only portable variable names and non-secret placeholders in `.env.template`.
-
-Populated instances should complete any additional local setup documented in `README.local.md` when that file exists. Other instance-owned documents may also define variables for local project families.
-
-## Project Profiles
-
-Project profiles live in `projects/`. They use the variables from `.env` instead of developer-specific absolute paths.
-
-Before running commands that depend on local paths, load the environment:
-
-```bash
-set -a
-. ./.env
-set +a
+```text
+Create a GitLab merge request for the current branch.
 ```
 
-See `projects/README.md` for generic project profile rules. Populated instances may keep the active project index in `projects/index.local.md`.
+```text
+Resolve the merge conflicts for this project branch.
+```
 
-See `references/README.md` for generic reference rules. Populated instances may keep a local reference index in `references/index.local.md`.
+The agent should choose the right workflow, explain the plan, avoid unrelated changes, run suitable checks, and report what changed.
+
+## Preserve Knowledge
+
+When a session produced reusable knowledge, say:
+
+```text
+Save the durable learnings from this session.
+```
+
+For a raw end-of-session capture, say:
+
+```text
+Close this session and save a raw note.
+```
+
+The agent should separate rough session notes from durable memory and avoid promoting noise into long-lived context.
+
+## Update CodexHome
+
+To apply new generic starter improvements to an existing private instance, say:
+
+```text
+Update this instance from the latest starter release.
+```
+
+For a preview first, say:
+
+```text
+Show me the starter update plan before applying it.
+```
+
+The agent should protect your projects, wiki notes, incidents, local overlays, and private context while updating starter-owned files.
+
+## Read Next
+
+Start with [Getting Started With CodexHome](references/getting-started-with-codexhome.md). It describes the full user journey by use case.
+
+The system is working when you can describe the outcome you want and the agent can handle the mechanics, safety checks, verification, and memory updates.
