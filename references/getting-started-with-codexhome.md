@@ -27,7 +27,8 @@ For clean distribution and safe upgrades, treat the reusable starter and each po
 8. Read `projects/README.md`.
 9. Read `projects/index.local.md`.
 10. Read `references/index.local.md`.
-11. Add or update project profiles for the repositories you will work on.
+11. Publish the initialized instance to an empty private Git remote.
+12. Add or update project profiles for the repositories you will work on.
 
 Do not commit `.env`, raw logs, raw session notes, or developer-specific absolute home-directory paths.
 
@@ -36,6 +37,24 @@ Bootstrap creates local scaffold files without overwriting existing local files.
 When an agent handles the initialization request, it should run the bootstrap command and report the created scaffolds. Bootstrap sets `CODEX_HOME` to the current checkout. The agent must not infer `PROJECTS_ROOT`; it should write `PROJECTS_ROOT` only when the user explicitly provides the desired value.
 
 Use `uv run python scripts/bootstrap_instance.py --projects-root <path>` when the user provides `PROJECTS_ROOT` before the first bootstrap run. If `PROJECTS_ROOT` remains a placeholder after bootstrap, the agent should ask which project root to use. When the user answers, run `uv run python scripts/bootstrap_instance.py --env-only --projects-root <path>` so the dirty scaffold worktree does not block the local `.env` update.
+
+## Publish Instance
+
+After bootstrap, publish the initialized instance to a private repository owned by the user or organization. GitHub and GitLab use the same provider-neutral workflow: create an empty private remote first, then pass its Git URL to the publish command.
+
+Preview the plan:
+
+```bash
+uv run python scripts/publish_instance.py --instance-remote <git-url> --dry-run
+```
+
+Commit and push the initialized instance:
+
+```bash
+uv run python scripts/publish_instance.py --instance-remote <git-url> --push
+```
+
+The command refuses to publish when `.env` is tracked or staged, when unexpected files are dirty, when scaffold files contain developer home-directory paths, or when `origin` already points to a non-starter repository. If `origin` points to `codexhome-starter`, it is renamed to `starter`; the private instance remote becomes `origin`.
 
 ## Add Projects
 
@@ -157,12 +176,13 @@ After a clean checkout:
 
 1. Run `uv run python scripts/bootstrap_instance.py`.
 2. Configure `PROJECTS_ROOT` in `.env`, or run `uv run python scripts/bootstrap_instance.py --env-only --projects-root /path/to/projects` after bootstrap.
-3. Add the first project profile.
-4. Solve one small task with the agent.
-5. Close the session and confirm a raw note appears under `wiki/sessions/`.
-6. Promote one durable learning only if it will help future work.
-7. Run checks.
-8. Commit only curated changes.
+3. Publish the initialized instance with `uv run python scripts/publish_instance.py --instance-remote <git-url> --push`.
+4. Add the first project profile.
+5. Solve one small task with the agent.
+6. Close the session and confirm a raw note appears under `wiki/sessions/`.
+7. Promote one durable learning only if it will help future work.
+8. Run checks.
+9. Commit only curated changes.
 
 The system is working when the user can always answer three questions:
 

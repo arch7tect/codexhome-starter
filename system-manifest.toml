@@ -1,5 +1,5 @@
 schema_version = 1
-starter_version = "v0.1.4"
+starter_version = "v0.1.5"
 description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
 default_class = "reserved_user"
 prune = "manual"
@@ -17,6 +17,7 @@ commands = [
   "uv run python scripts/tests/test_sync_system.py",
   "uv run python scripts/tests/test_release_hygiene.py",
   "uv run python scripts/tests/test_bootstrap_instance.py",
+  "uv run python scripts/tests/test_publish_instance.py",
 ]
 
 [[paths]]
@@ -266,6 +267,12 @@ content = "text"
 note = "Thin first-run bootstrap wrapper around starter sync apply."
 
 [[paths]]
+path = "scripts/publish_instance.py"
+class = "managed"
+content = "text"
+note = "Provider-neutral initialized instance publishing command."
+
+[[paths]]
 path = "scripts/tests/test_sync_system.py"
 class = "managed"
 content = "text"
@@ -282,6 +289,12 @@ path = "scripts/tests/test_bootstrap_instance.py"
 class = "managed"
 content = "text"
 note = "First-run bootstrap regression test."
+
+[[paths]]
+path = "scripts/tests/test_publish_instance.py"
+class = "managed"
+content = "text"
+note = "Initialized instance publishing regression test."
 
 [[paths]]
 path = "system-manifest.toml"

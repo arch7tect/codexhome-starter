@@ -41,6 +41,34 @@ uv run python scripts/bootstrap_instance.py --env-only --projects-root /path/to/
 
 Review `git status` and commit the initialized local scaffolds when they look right.
 
+## Publish Initialized Instance
+
+Create an empty private repository on GitHub, GitLab, or another Git host. Then publish this initialized instance to that remote:
+
+```bash
+uv run python scripts/publish_instance.py \
+  --instance-remote git@github.com:user/codexhome-instance.git \
+  --dry-run
+```
+
+When the plan looks right, push it:
+
+```bash
+uv run python scripts/publish_instance.py \
+  --instance-remote git@github.com:user/codexhome-instance.git \
+  --push
+```
+
+Use the same command shape for GitLab:
+
+```bash
+uv run python scripts/publish_instance.py \
+  --instance-remote git@gitlab.com:group/codexhome-instance.git \
+  --push
+```
+
+The publish command keeps the starter remote as `starter`, makes the private instance repository `origin`, commits only initialized scaffold files plus `system-lock.toml`, and refuses to publish `.env`.
+
 ## Start Here
 
 New users should read [Getting Started With CodexHome](references/getting-started-with-codexhome.md) after cloning the repository and running bootstrap.

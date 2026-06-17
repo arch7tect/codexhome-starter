@@ -16,6 +16,7 @@ Project conventions:
 - Store local developer path values in gitignored `.env`; keep `.env.template` as the committed variable contract. Load `.env` before running commands that depend on those variables.
 - If `AGENTS.local.md` exists, read it after this file for instance-specific rules, variable names, project families, or local overlays. If the current agent runtime does not auto-load it, inspect it manually before using local context.
 - When a user asks to initialize or bootstrap this CodexHome instance, run `uv run python scripts/bootstrap_instance.py` from the repository root. Bootstrap creates `.env` from `.env.template` and sets `CODEX_HOME` to the current checkout path. Do not infer or discover `PROJECTS_ROOT`; pass `--projects-root <path>` only when the user explicitly provides that value before the first bootstrap run. If `PROJECTS_ROOT` is still a placeholder after bootstrap, ask the user which project root to use; when they provide it, run `uv run python scripts/bootstrap_instance.py --env-only --projects-root <path>`.
+- When a user asks to publish an initialized CodexHome instance, ask for the empty private Git remote URL if it was not provided. Use `uv run python scripts/publish_instance.py --instance-remote <url> --dry-run` to show the plan, then run with `--push` only when the user asked to push. Do not create GitHub or GitLab repositories automatically unless the user explicitly asks for repository creation.
 
 Repository layout:
 
