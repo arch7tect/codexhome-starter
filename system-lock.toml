@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.10"
-generated_at = "2026-06-17T20:54:09Z"
+starter_version = "v0.1.11"
+generated_at = "2026-06-17T21:00:52Z"
 source = "."
 
 [[paths]]
@@ -271,7 +271,7 @@ sha256 = "3c4997f0c9e444ea8cda6ea817ec8b5228d0aef854dc52885fa03eb6299eef95"
 path = "README.md"
 class = "managed"
 content = "text"
-sha256 = "4695e17e35fe50dc5731b3757f7f63c265cd05c2e26c5c495bdb361054fa433e"
+sha256 = "4dcfabdf96045c57c739322dc3f927b50fc0add02e69fa90504c2364992c2b06"
 
 [[paths]]
 path = "incidents/README.md"
@@ -457,7 +457,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "abb5cd9c54bbbac33e7850241ce9ea885a6c33f0bbd7b331ae69f2c0c61fa9a2"
+sha256 = "4d770c2120de443a76cbcfbe91ce5732c178af834b42293743c2943bf783a247"
 
 [[paths]]
 path = "uv.lock"

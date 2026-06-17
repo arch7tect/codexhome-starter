@@ -4,9 +4,17 @@ CodexHome is a personal operating context for agent-assisted engineering work. I
 
 You normally use this repository by talking to an agent. You should not need to run setup scripts by hand.
 
+Want the full picture first? Read [Getting Started With CodexHome](references/getting-started-with-codexhome.md).
+
+## Before You Start
+
+You need an AI coding agent that can read and edit files in this cloned folder. Point the agent at this checkout, then give it the plain-language instructions below.
+
+If the agent cannot complete a step, ask it to explain the blocker, what changed, and what decision it needs from you.
+
 ## What To Do After Clone
 
-Open this checkout in your agent environment and say:
+Say:
 
 ```text
 Initialize this CodexHome instance.
@@ -18,7 +26,7 @@ If you already know where your project checkouts live, say:
 Initialize this CodexHome instance. Use this projects root: <path>.
 ```
 
-The agent should create the local scaffold files, keep private paths in ignored local config, and tell you what still needs your attention.
+Expect local scaffold files, ignored private config, and a short summary of anything still needing your input.
 
 ## Publish Your Instance
 
@@ -28,7 +36,7 @@ After initialization, create an empty private repository on your preferred host.
 Publish this initialized instance to this private remote: <remote-url>.
 ```
 
-The agent should keep the clean starter source separate from your private instance, publish only safe initialized files, and refuse to publish local secrets or raw session notes.
+Use the private repository URL from GitHub, GitLab, or another host. Expect the agent to keep the clean starter source separate from your private instance, publish only safe initialized files, and refuse to publish local secrets or raw session notes.
 
 ## Add Projects
 
@@ -38,13 +46,15 @@ To make a project available for future work, say:
 Add this project to CodexHome: <project name>, repository <url>, local path <path>.
 ```
 
+The local path should point to the project checkout on your machine.
+
 If the project is unfamiliar, ask the agent to inspect it first:
 
 ```text
 Inspect this project and create a project profile for future work: <path>.
 ```
 
-Project profiles help the agent remember where code lives, how to update it, how to verify changes, and what conventions matter.
+Expect a project profile that records where code lives, how to update it, how to verify changes, and what conventions matter.
 
 ## Work With Projects
 
@@ -70,7 +80,7 @@ Create a GitLab merge request for the current branch.
 Resolve the merge conflicts for this project branch.
 ```
 
-The agent should choose the right workflow, explain the plan, avoid unrelated changes, run suitable checks, and report what changed.
+Expect the agent to choose the right workflow, explain the plan, avoid unrelated changes, run suitable checks, and report what changed.
 
 ## Preserve Knowledge
 
@@ -86,7 +96,7 @@ For a raw end-of-session capture, say:
 Close this session and save a raw note.
 ```
 
-The agent should separate rough session notes from durable memory and avoid promoting noise into long-lived context.
+Expect the agent to separate rough session notes from durable memory and avoid promoting noise into long-lived context.
 
 ## Update CodexHome
 
@@ -102,10 +112,10 @@ For a preview first, say:
 Show me the starter update plan before applying it.
 ```
 
-The agent should protect your projects, wiki notes, incidents, local overlays, and private context while updating starter-owned files.
+Expect the agent to protect your projects, wiki notes, incidents, local overlays, and private context while updating starter-owned files.
 
 ## Read Next
 
-Start with [Getting Started With CodexHome](references/getting-started-with-codexhome.md). It describes the full user journey by use case.
+Use [Getting Started With CodexHome](references/getting-started-with-codexhome.md) as the detailed user journey by use case.
 
 The system is working when you can describe the outcome you want and the agent can handle the mechanics, safety checks, verification, and memory updates.
