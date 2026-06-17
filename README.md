@@ -18,6 +18,8 @@ You can also start Codex in this checkout and ask:
 Initialize this CodexHome instance.
 ```
 
+Agents should satisfy that request by running `uv run python scripts/bootstrap_instance.py` from the repository root. Bootstrap leaves placeholder values in `.env`; agents must not infer or write real local paths unless the user explicitly provides those values in the same request.
+
 After bootstrap, edit `.env` and fill in local paths:
 
 ```bash

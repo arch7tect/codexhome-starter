@@ -33,6 +33,8 @@ Do not commit `.env`, raw logs, raw session notes, or developer-specific absolut
 
 Bootstrap creates local scaffold files without overwriting existing local files. Use `AGENTS.local.md` and `README.local.md` for committed instance-specific rules and setup notes that should not become starter-managed system content. Keep local secret values and developer paths in `.env`, not in local Markdown files.
 
+When an agent handles the initialization request, it should only run the bootstrap command and report the created scaffolds. It must leave `.env` with placeholder values from `.env.template` unless the user explicitly provides the desired local path values in the same request.
+
 ## Add Projects
 
 For each external project:

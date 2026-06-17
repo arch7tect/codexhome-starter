@@ -76,7 +76,7 @@ def main() -> int:
     print()
     print("# Next Steps")
     print()
-    print("1. Edit `.env` and fill local paths.")
+    print("1. Edit `.env` manually and fill local paths; bootstrap leaves placeholder values unless you explicitly provide real paths.")
     print("2. Create your first project profile from `projects/_template.md`.")
     print("3. Review `git status` and commit the initialized local scaffolds.")
     print("4. Start Codex in this checkout and ask it to read `AGENTS.md`.")

@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.2"
-generated_at = "2026-06-17T14:39:10Z"
+starter_version = "v0.1.3"
+generated_at = "2026-06-17T14:54:02Z"
 source = "."
 
 [[paths]]
@@ -199,7 +199,7 @@ sha256 = "02e735b3dfe1c32833eb550b7ff8ffa17f5f2bc3fa1e7bae61a8f5a3883ce398"
 path = "AGENTS.md"
 class = "managed"
 content = "text"
-sha256 = "91a76bb2b8f425ebbad9f281da927afff6cd710c1142a5221b02e78df915cafc"
+sha256 = "68ebba62ec35fb4a349b78a366323a5d7ebabe3a183c4e373f64fae1084dbc93"
 
 [[paths]]
 path = "CLAUDE.md"
@@ -211,7 +211,7 @@ sha256 = "3c4997f0c9e444ea8cda6ea817ec8b5228d0aef854dc52885fa03eb6299eef95"
 path = "README.md"
 class = "managed"
 content = "text"
-sha256 = "2fc8ba533674902ed154739fb82194ac71edc063eb85556845d8c8fdf1f7061f"
+sha256 = "19c84000fbd3322233deb195d51b6d0c926759cdccbc7db282d8f505c6f017ed"
 
 [[paths]]
 path = "incidents/README.md"
@@ -241,7 +241,7 @@ sha256 = "f3e4042ec349b49e7754177549ad374c9a7e5495acd538bb9049edff7b79f69e"
 path = "references/getting-started-with-codexhome.md"
 class = "managed"
 content = "text"
-sha256 = "8c11489318c50a5dfaba4881a8ddfa9b84ec387433221889dd67101e4ad520db"
+sha256 = "d5741d7868ccaf04df05b2f02e9ea2e84a0fa9ae9362f4c640615d882f50dedd"
 
 [[paths]]
 path = "references/starter-instance-sync.md"
@@ -301,7 +301,7 @@ sha256 = "9007f70b74c40ba1c126d4d1e4fbdc8965705326d82215d575a387f2eb2ee02a"
 path = "scripts/bootstrap_instance.py"
 class = "managed"
 content = "text"
-sha256 = "55c6bda9986f5b61aea8af98dc66829ac836a0efa6fd99d13ecb9a2a44ea4b5d"
+sha256 = "8eb653b3d82ec724c20554e16322f5f3ffdadf9539fff9914b34f55ab682ecca"
 
 [[paths]]
 path = "scripts/release_hygiene.py"
@@ -325,7 +325,7 @@ sha256 = "a24118466bdc95638385eed40956929d6b467a86259461dc57b84969932f4668"
 path = "scripts/tests/test_bootstrap_instance.py"
 class = "managed"
 content = "text"
-sha256 = "bb7179d4fdaab2df5e8e213d22d9e818050b34fa922281d43cf6658a0931abdb"
+sha256 = "222c5cf7af3e7b876d914d3345a04e3bb3c798872da6aff0c997b1dcb6bffcd3"
 
 [[paths]]
 path = "scripts/tests/test_release_hygiene.py"
@@ -379,7 +379,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "475126a4098a73766cd67d7ddc6989c8535f7a6f72079a1d593810895d3cc4a4"
+sha256 = "ab5790864a062b3116939bec0abb804ff12e556d6b39eeabde5b73cb6c13871f"
 
 [[paths]]
 path = "uv.lock"

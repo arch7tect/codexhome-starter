@@ -102,10 +102,14 @@ def test_bootstrap_instance_creates_expected_scaffolds_and_is_idempotent() -> No
     for rel_path in EXPECTED_BOOTSTRAP_SCAFFOLDS:
         if not (repo / rel_path).is_file():
             raise AssertionError(f"bootstrap did not create {rel_path}\n{output}")
+    if (repo / ".env").read_text(encoding="utf-8") != (repo / ".env.template").read_text(encoding="utf-8"):
+        raise AssertionError("bootstrap should create .env from .env.template without filling local values")
     if (repo / "instance-manifest.toml").exists():
         raise AssertionError("bootstrap should not create instance-manifest.toml by default")
     if "Next Steps" not in output:
         raise AssertionError(f"bootstrap should print next steps: {output}")
+    if "bootstrap leaves placeholder values" not in output:
+        raise AssertionError(f"bootstrap should tell users that .env placeholders are not auto-filled: {output}")
 
     git(repo, "add", "AGENTS.local.md", "README.local.md", "references/index.local.md", "projects/_template.md", "projects/index.local.md", "wiki/index.md", "system-lock.toml")
     git(repo, "commit", "-m", "initialize")
