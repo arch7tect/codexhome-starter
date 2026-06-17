@@ -18,20 +18,20 @@ For clean distribution and safe upgrades, treat the reusable starter and each po
 ## First Run
 
 1. Clone the clean starter repository for a new installation, or use this populated repository only when intentionally working in this instance.
-2. Copy `.env.template` to `.env`.
+2. Ask Codex to initialize the instance, or run `uv run python scripts/bootstrap_instance.py`.
 3. Fill local path variables in `.env`.
 4. Read `AGENTS.md`.
-5. Read `AGENTS.local.md` if it exists in this checkout.
-6. Read `README.local.md` if it exists in this checkout.
+5. Read `AGENTS.local.md`.
+6. Read `README.local.md`.
 7. Read this guide.
 8. Read `projects/README.md`.
-9. Read `projects/index.local.md` if it exists in this checkout.
-10. Read `references/index.local.md` if it exists in this checkout.
+9. Read `projects/index.local.md`.
+10. Read `references/index.local.md`.
 11. Add or update project profiles for the repositories you will work on.
 
 Do not commit `.env`, raw logs, raw session notes, or developer-specific absolute home-directory paths.
 
-Use `AGENTS.local.md` and `README.local.md` for committed instance-specific rules and setup notes that should not become starter-managed system content. Keep local secret values and developer paths in `.env`, not in local Markdown files.
+Bootstrap creates local scaffold files without overwriting existing local files. Use `AGENTS.local.md` and `README.local.md` for committed instance-specific rules and setup notes that should not become starter-managed system content. Keep local secret values and developer paths in `.env`, not in local Markdown files.
 
 ## Add Projects
 
@@ -151,13 +151,14 @@ Starter maintainers should use [Starter Release Procedure](starter-release-proce
 
 After a clean checkout:
 
-1. Configure `.env`.
-2. Add the first project profile.
-3. Solve one small task with the agent.
-4. Close the session and confirm a raw note appears under `wiki/sessions/`.
-5. Promote one durable learning only if it will help future work.
-6. Run checks.
-7. Commit only curated changes.
+1. Run `uv run python scripts/bootstrap_instance.py`.
+2. Configure `.env`.
+3. Add the first project profile.
+4. Solve one small task with the agent.
+5. Close the session and confirm a raw note appears under `wiki/sessions/`.
+6. Promote one durable learning only if it will help future work.
+7. Run checks.
+8. Commit only curated changes.
 
 The system is working when the user can always answer three questions:
 

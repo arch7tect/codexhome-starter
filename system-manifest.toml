@@ -1,5 +1,5 @@
 schema_version = 1
-starter_version = "v0.1.1"
+starter_version = "v0.1.2"
 description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
 default_class = "reserved_user"
 prune = "manual"
@@ -16,6 +16,7 @@ commands = [
   "uv run python scripts/tests/test_system_lock.py",
   "uv run python scripts/tests/test_sync_system.py",
   "uv run python scripts/tests/test_release_hygiene.py",
+  "uv run python scripts/tests/test_bootstrap_instance.py",
 ]
 
 [[paths]]
@@ -259,6 +260,12 @@ content = "text"
 note = "Clean starter release hygiene gate."
 
 [[paths]]
+path = "scripts/bootstrap_instance.py"
+class = "managed"
+content = "text"
+note = "Thin first-run bootstrap wrapper around starter sync apply."
+
+[[paths]]
 path = "scripts/tests/test_sync_system.py"
 class = "managed"
 content = "text"
@@ -269,6 +276,12 @@ path = "scripts/tests/test_release_hygiene.py"
 class = "managed"
 content = "text"
 note = "Clean starter release hygiene regression test."
+
+[[paths]]
+path = "scripts/tests/test_bootstrap_instance.py"
+class = "managed"
+content = "text"
+note = "First-run bootstrap regression test."
 
 [[paths]]
 path = "system-manifest.toml"
@@ -294,30 +307,35 @@ note = "Local developer environment values."
 path = "AGENTS.local.md"
 class = "scaffold_once"
 content = "text"
+source = "references/system/scaffolds/agents-local.md"
 note = "Local or organization-specific agent rules."
 
 [[paths]]
 path = "README.local.md"
 class = "scaffold_once"
 content = "text"
+source = "references/system/scaffolds/readme-local.md"
 note = "Local instance orientation."
 
 [[paths]]
 path = "references/index.local.md"
 class = "scaffold_once"
 content = "text"
+source = "references/system/scaffolds/references-index-local.md"
 note = "Local reference index."
 
 [[paths]]
 path = "projects/_template.md"
 class = "scaffold_once"
 content = "text"
+source = "references/system/scaffolds/project-template.md"
 note = "Initial project profile template."
 
 [[paths]]
 path = "projects/index.local.md"
 class = "scaffold_once"
 content = "text"
+source = "references/system/scaffolds/projects-index-local.md"
 note = "Local project index."
 
 [[paths]]

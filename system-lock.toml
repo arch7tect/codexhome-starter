@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.1"
-generated_at = "2026-06-17T11:32:19Z"
+starter_version = "v0.1.2"
+generated_at = "2026-06-17T14:39:10Z"
 source = "."
 
 [[paths]]
@@ -211,7 +211,7 @@ sha256 = "3c4997f0c9e444ea8cda6ea817ec8b5228d0aef854dc52885fa03eb6299eef95"
 path = "README.md"
 class = "managed"
 content = "text"
-sha256 = "8369be71fb39ddb3ada05adde2f21b2305d24d6ab6502b95912d4c9dc0c34ecd"
+sha256 = "2fc8ba533674902ed154739fb82194ac71edc063eb85556845d8c8fdf1f7061f"
 
 [[paths]]
 path = "incidents/README.md"
@@ -241,19 +241,49 @@ sha256 = "f3e4042ec349b49e7754177549ad374c9a7e5495acd538bb9049edff7b79f69e"
 path = "references/getting-started-with-codexhome.md"
 class = "managed"
 content = "text"
-sha256 = "a5077a64006a761c2afc04007f3fdbff46d7d56e38f663f3c48d3fa046062c21"
+sha256 = "8c11489318c50a5dfaba4881a8ddfa9b84ec387433221889dd67101e4ad520db"
 
 [[paths]]
 path = "references/starter-instance-sync.md"
 class = "managed"
 content = "text"
-sha256 = "0bfad87a841905ca261acd1e846520121e7f23d08eebf7290299d2a0e3bba0b4"
+sha256 = "d6b834e7e99fd873f0b520ccc439740ae14e312da4b7b3087d5b644f97e75a69"
 
 [[paths]]
 path = "references/starter-release-procedure.md"
 class = "managed"
 content = "text"
 sha256 = "2f4f44ad3b14ec1d6fdacc2a7deaaff841d20ee75bc3475dfa7100c86f32a536"
+
+[[paths]]
+path = "references/system/scaffolds/agents-local.md"
+class = "managed"
+content = "text"
+sha256 = "b8ddb3e9810a08e45b3c1a41a66883e5b4440ee858e94f6999fe0c86f23df7fc"
+
+[[paths]]
+path = "references/system/scaffolds/project-template.md"
+class = "managed"
+content = "text"
+sha256 = "e7f6bd1ce313f513c48d6215db93f175832aac72ced2ff5eef2fb6b76de2f9ae"
+
+[[paths]]
+path = "references/system/scaffolds/projects-index-local.md"
+class = "managed"
+content = "text"
+sha256 = "8ee00d3aaf165d2d5c3490eb3f59b7eed807687f620fc848eedb0363b8cb8b4e"
+
+[[paths]]
+path = "references/system/scaffolds/readme-local.md"
+class = "managed"
+content = "text"
+sha256 = "253aea83f4c71bfebdb003c5d6f4fd1c2ca72f39e8583c0624b5ab41eb26e6d6"
+
+[[paths]]
+path = "references/system/scaffolds/references-index-local.md"
+class = "managed"
+content = "text"
+sha256 = "6bc0138fc59572281a458389e72d663be523706d8de28c518eb71b6c9045381b"
 
 [[paths]]
 path = "references/system/scaffolds/wiki-index.md"
@@ -266,6 +296,12 @@ path = "references/system/system-lock-format.md"
 class = "managed"
 content = "text"
 sha256 = "9007f70b74c40ba1c126d4d1e4fbdc8965705326d82215d575a387f2eb2ee02a"
+
+[[paths]]
+path = "scripts/bootstrap_instance.py"
+class = "managed"
+content = "text"
+sha256 = "55c6bda9986f5b61aea8af98dc66829ac836a0efa6fd99d13ecb9a2a44ea4b5d"
 
 [[paths]]
 path = "scripts/release_hygiene.py"
@@ -284,6 +320,12 @@ path = "scripts/system_lock.py"
 class = "managed"
 content = "text"
 sha256 = "a24118466bdc95638385eed40956929d6b467a86259461dc57b84969932f4668"
+
+[[paths]]
+path = "scripts/tests/test_bootstrap_instance.py"
+class = "managed"
+content = "text"
+sha256 = "bb7179d4fdaab2df5e8e213d22d9e818050b34fa922281d43cf6658a0931abdb"
 
 [[paths]]
 path = "scripts/tests/test_release_hygiene.py"
@@ -337,7 +379,7 @@ sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "0bcdf2e775e2caa730833a505bbf1aa4cc0d297a9336e9a2e16eb7a2fdcbf1a3"
+sha256 = "475126a4098a73766cd67d7ddc6989c8535f7a6f72079a1d593810895d3cc4a4"
 
 [[paths]]
 path = "uv.lock"

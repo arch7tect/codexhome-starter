@@ -76,7 +76,9 @@ Baseline classification:
 | `scripts/system_lock.py` | managed | Generic system-lock hashing and decision support. |
 | `scripts/tests/test_system_lock.py` | managed | Generic system-lock regression tests. |
 | `scripts/sync_system.py` | managed | Generic starter sync check, dry-run, and apply command. |
+| `scripts/bootstrap_instance.py` | managed | Thin first-run bootstrap wrapper around starter sync apply. |
 | `scripts/tests/test_sync_system.py` | managed | Generic starter sync regression tests. |
+| `scripts/tests/test_bootstrap_instance.py` | managed | First-run bootstrap regression tests. |
 | `scripts/wiki_metrics.py` | reserved_user | Validation experiment tooling, not starter core. |
 | `scripts/<generic-script>.py` | managed | Only generic repository maintenance scripts explicitly listed in the manifest. |
 | `scripts/*` | reserved_user | Default for unlisted scripts, local experiments, and optional packs not included in the current starter release. |
