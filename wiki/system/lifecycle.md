@@ -1,8 +1,8 @@
 ---
 status: active
-updated: 2026-06-17
+updated: 2026-07-29
 confidence: decision
-expires: 2027-06-17
+expires: 2027-07-29
 sources:
   - AGENTS.md
   - references/getting-started-with-codexhome.md
@@ -31,6 +31,10 @@ Use the wiki when a task produces context that should survive beyond one session
 
 - Raw notes are low-trust input and stay out of git by default.
 - Durable wiki pages need explicit sources and a review expiry.
+- Incident-specific evidence and reports originate in canonical
+  `incidents/<case-id>/` records. Promote only generalized, reviewed knowledge
+  from a case, and cite the case UUID or report.
+- Promote evidence and knowledge separately: durable textual evidence belongs in a gated `research/<bundle-id>/` bundle, while the wiki stays compact and links to it.
 - Use project profiles, skills, and references as source-of-truth links instead of duplicating them.
 - Scheduled jobs may report stale or broken pages, but must not publish raw notes automatically.
 - See [Page Contract](page-contract.md) before publishing wiki content.

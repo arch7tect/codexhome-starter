@@ -43,6 +43,19 @@ def test_manifest_loads() -> None:
         raise AssertionError("unexpected matching strategy")
     if len(manifest.entries) < 50:
         raise AssertionError("manifest loaded too few entries")
+    example = classify_path(manifest, "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml")
+    registry = classify_path(manifest, "incidents/PUBLIC-AGE-RECIPIENTS.yaml")
+    bridge = classify_path(manifest, ".claude/skills")
+    if example is None or example.path_class != "managed":
+        raise AssertionError("public recipient registry example must be managed")
+    if (
+        registry is None
+        or registry.path_class != "scaffold_once"
+        or registry.source != "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml"
+    ):
+        raise AssertionError("public recipient registry must be an instance scaffold")
+    if bridge is not None:
+        raise AssertionError("Claude Code skill bridge must remain outside sync ownership")
 
 
 def test_manifest_requires_starter_version() -> None:
@@ -239,6 +252,46 @@ sha256 = "{old_hash}"
         raise AssertionError(f"unexpected scaffold creations: {plan.scaffold_once_creations}")
     if not {"existing_seed.md", "local.txt"}.issubset(item_paths(plan.skipped_user_paths)):
         raise AssertionError(f"unexpected skipped user paths: {plan.skipped_user_paths}")
+
+
+def test_new_scaffold_source_can_arrive_in_second_manifest_pass() -> None:
+    base = ROOT / "scripts" / "tests" / ".generated" / "sync_new_scaffold_source"
+    if base.exists():
+        shutil.rmtree(base)
+    local = base / "local"
+    starter = base / "starter"
+    local.mkdir(parents=True)
+    starter.mkdir(parents=True)
+    manifest = """schema_version = 1
+starter_version = "test"
+default_class = "reserved_user"
+matching = "specific_before_glob"
+
+[verification]
+commands = []
+
+[[paths]]
+path = "examples/config.example"
+class = "managed"
+content = "text"
+
+[[paths]]
+path = "config.local"
+class = "scaffold_once"
+content = "text"
+source = "examples/config.example"
+"""
+    write_text(local / "system-manifest.toml", manifest)
+    write_text(local / "system-lock.toml", "")
+    write_text(starter / "system-manifest.toml", manifest)
+    write_text(starter / "examples/config.example", "safe example\n")
+
+    plan = build_sync_plan(local, starter, "system-manifest.toml", require_clean=False)
+
+    if item_paths(plan.new_managed_files) != {"examples/config.example"}:
+        raise AssertionError(f"new scaffold source should be managed: {plan.new_managed_files}")
+    if item_paths(plan.scaffold_once_creations) != {"config.local"}:
+        raise AssertionError(f"new scaffold target should be created: {plan.scaffold_once_creations}")
 
 
 def test_adopt_writes_lockfile_for_matching_managed_paths() -> None:
@@ -1131,6 +1184,7 @@ def main() -> int:
     test_lockfile_requires_hex_sha256()
     test_specific_before_glob()
     test_dry_run_groups_sync_actions()
+    test_new_scaffold_source_can_arrive_in_second_manifest_pass()
     test_adopt_writes_lockfile_for_matching_managed_paths()
     test_adopt_refreshes_stale_matching_lockfile_entry()
     test_adopt_backfills_existing_scaffold_once_lock_entry()

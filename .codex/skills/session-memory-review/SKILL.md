@@ -22,10 +22,18 @@ description: Review an interactive work session and update CodexHome memory, pro
 4. Choose the destination:
    - `AGENTS.md` for global rules that should affect every future turn.
    - `projects/*.md` for project-specific paths, commands, relationships, and notes.
+   - `incidents/<case-id>/` for incident-specific reports, evidence provenance,
+     and explicit knowledge dispositions; raw artifacts stay under its ignored
+     `local/` directory.
+   - `research/<bundle-id>/` for investigation evidence: canonical records, derived summaries, scripts, manifest, checksums, and local-only sensitive material.
    - `references/*.md` for longer durable context, decisions, investigations, or examples.
    - `.codex/skills/<skill-name>/SKILL.md` for repeatable procedures.
 5. Prefer operational memory over passive storage:
    - Put actionable rules in the skill or project profile that will be loaded before the same work recurs.
+   - Do not relocate raw investigation evidence into `references/`; keep references as prose that links a gated research bundle.
+   - Do not relocate raw incident evidence into `references/`, project
+     profiles, or product repositories; keep it under the canonical case
+     `local/` tier.
    - Use `references/*.md` only for background, evidence, examples, or retrospective context that does not need to alter future workflow.
    - If a session mistake exposed a weakness in this memory workflow, update `session-memory-review` itself so the review procedure improves.
    - Do not create generic lesson, mistake, retrospective, or incident-investigation warehouse files. If one exists, break it apart into concrete skills/profiles/global rules and delete the warehouse file.

@@ -17,6 +17,10 @@ Use this skill to apply starter-owned improvements while preserving instance-own
 6. Review changed files and conflicts.
 7. Run manifest verification commands.
 8. Commit the starter update as one reviewable change when the user asked to apply it.
+9. After that commit, run `uv run python scripts/bootstrap_instance.py` once
+   more. It verifies the applied release, creates any newly introduced
+   scaffold-once paths, and creates or checks the ignored Claude Code skill
+   bridge without adding it to the update commit.
 
 ## Commands
 

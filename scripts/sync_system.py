@@ -104,7 +104,12 @@ class ResolvedStarterSource:
     is_local_path: bool
 
 
-def parse_manifest_entries(data: dict[str, Any], root: Path, allow_sources: bool = True) -> list[ManifestEntry]:
+def parse_manifest_entries(
+    data: dict[str, Any],
+    root: Path,
+    allow_sources: bool = True,
+    require_sources: bool = True,
+) -> list[ManifestEntry]:
     entries: list[ManifestEntry] = []
     seen: set[str] = set()
     for index, item in enumerate(data.get("paths", []), start=1):
@@ -130,7 +135,7 @@ def parse_manifest_entries(data: dict[str, Any], root: Path, allow_sources: bool
         if source is not None:
             if not allow_sources:
                 raise ValueError(f"manifest entry {entry_path} must not define source")
-            if not (root / source).exists():
+            if require_sources and not (root / source).exists():
                 raise ValueError(f"manifest entry {entry_path} source does not exist: {source}")
 
         entries.append(
@@ -163,7 +168,12 @@ def load_instance_reservations(root: Path) -> list[ManifestEntry]:
     return entries
 
 
-def load_manifest(path: Path, root: Path = ROOT) -> Manifest:
+def load_manifest(
+    path: Path,
+    root: Path = ROOT,
+    *,
+    require_sources: bool = True,
+) -> Manifest:
     data = tomllib.loads(path.read_text(encoding="utf-8"))
     schema_version = data.get("schema_version")
     if schema_version != 1:
@@ -191,7 +201,11 @@ def load_manifest(path: Path, root: Path = ROOT) -> Manifest:
         starter_version=starter_version,
         default_class=default_class,
         matching=matching,
-        entries=parse_manifest_entries(data, root),
+        entries=parse_manifest_entries(
+            data,
+            root,
+            require_sources=require_sources,
+        ),
         verification_commands=commands,
         local_reservations=load_instance_reservations(root),
     )
@@ -467,7 +481,11 @@ def append_decision(plan: dict[str, list[SyncPlanItem]], item: SyncPlanItem, dec
 
 
 def build_sync_plan(local_root: Path, starter_root: Path, manifest_path: str, require_clean: bool = True) -> SyncPlan:
-    local_manifest = load_manifest(local_root / manifest_path, local_root)
+    local_manifest = load_manifest(
+        local_root / manifest_path,
+        local_root,
+        require_sources=False,
+    )
     load_manifest(starter_root / manifest_path, starter_root)
     lock_entries = load_lockfile(local_root / "system-lock.toml")
     dirty = git_status(local_root)
@@ -678,7 +696,11 @@ def apply_sync_plan(local_root: Path, starter_root: Path, manifest_path: str, so
     if dirty:
         raise ValueError("worktree changed before apply")
 
-    manifest = load_manifest(local_root / manifest_path, local_root)
+    manifest = load_manifest(
+        local_root / manifest_path,
+        local_root,
+        require_sources=False,
+    )
     lock_entries = load_lockfile(local_root / "system-lock.toml")
     written_paths: list[str] = []
     lock_updated_paths: list[str] = []
@@ -823,7 +845,11 @@ def export_git_source(source: str, destination: Path, root: Path = ROOT) -> tupl
 def collect_adopt_entries(
     local_root: Path, starter_root: Path, manifest_path: str, include_scaffold_once: bool = True
 ) -> list[LockEntry]:
-    local_manifest = load_manifest(local_root / manifest_path, local_root)
+    local_manifest = load_manifest(
+        local_root / manifest_path,
+        local_root,
+        require_sources=False,
+    )
     load_manifest(starter_root / manifest_path, starter_root)
     lock_entries = load_lockfile(local_root / "system-lock.toml")
     entries: list[LockEntry] = []
@@ -861,7 +887,11 @@ def adopt_lockfile(
     if plan.dirty or plan.conflicts:
         return plan, []
 
-    manifest = load_manifest(local_root / manifest_path, local_root)
+    manifest = load_manifest(
+        local_root / manifest_path,
+        local_root,
+        require_sources=False,
+    )
     existing_entries = load_lockfile(local_root / "system-lock.toml")
     if not include_scaffold_once:
         existing_entries = {path: entry for path, entry in existing_entries.items() if entry.path_class == "managed"}

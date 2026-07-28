@@ -37,6 +37,11 @@ Use a GitHub, GitLab, or other Git remote URL. The remote repository should alre
 
 This publishes your CodexHome instance. It is different from opening a pull request or merge request for a project.
 
+Bootstrap also creates an ignored `.claude/skills` bridge to `.codex/skills`
+when the platform supports symlinks. If an existing path conflicts or the
+platform cannot create the bridge, bootstrap reports that state without
+overwriting anything.
+
 ## Add Projects
 
 To add a codebase you want the agent to work with, say:
@@ -141,7 +146,12 @@ If there are logs or artifacts:
 Investigate this incident using these artifacts: <paths or links>.
 ```
 
-The agent should create or use a case workspace, keep raw artifacts out of committed memory, collect evidence, and produce a concise report with root cause, impact, and next steps.
+The agent should create or reuse the canonical case under
+`incidents/<YYYY-MM-DD-system-topic>/` in CodexHome, not in a product
+repository. It keeps raw artifacts under the case's ignored `local/` directory,
+commits only a privacy-reviewed report and bounded sanitized evidence, and
+records whether the case should update a project profile, reusable skill,
+research bundle, wiki page, monitoring rule, or regression fixture.
 
 ## Build The Wiki
 
@@ -166,6 +176,17 @@ Review the wiki for stale, duplicate, or conflicting pages.
 ```
 
 The agent should keep raw notes separate from durable wiki pages, link related pages, verify wiki health, and ask before promoting uncertain knowledge.
+
+When a benchmark or investigation produces textual evidence that should remain
+auditable, ask:
+
+```text
+Preserve the textual evidence in a research bundle and link it from the wiki.
+```
+
+The agent should commit only safe canonical evidence and derived summaries,
+retain sensitive text under the bundle's ignored `local/` directory, generate a
+manifest and checksums, and run the research evidence gate.
 
 ## Save Knowledge
 
@@ -200,6 +221,10 @@ Show me the starter update plan before applying it.
 ```
 
 The agent should protect your instance-owned projects, wiki notes, incidents, and local context while applying starter-owned updates.
+When a release introduces new manifest ownership entries, the agent may need a
+second dry-run and apply pass. After committing the managed update, it should
+run bootstrap once more to create newly introduced local scaffolds and verify
+the ignored Claude Code skill bridge.
 
 ## Publish Or Push Changes
 

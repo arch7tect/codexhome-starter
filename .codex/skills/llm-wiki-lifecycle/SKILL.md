@@ -24,14 +24,24 @@ Use this skill for the CodexHome LLM-wiki lifecycle. Keep durable repository mem
    - create or update a raw local note under gitignored `wiki/sessions/`;
    - mark it as low-trust local input;
    - then promote durable knowledge only if the user asked for memory updates or approval is clear.
-5. Keep raw session notes out of git by default.
-6. Prefer links to `AGENTS.md`, project profiles, skills, and references instead of duplicating content.
-7. Do not publish verified wiki knowledge from raw notes without explicit maintainer approval.
-8. Run the smallest relevant verification:
+5. Before promoting an evidence-backed finding, verify the corresponding
+   evidence record:
+   - benchmarks and standalone investigations use a
+     `research/<bundle-id>/` bundle following `research/README.md`, with
+     `scripts/evidence_gate.py` passing;
+   - incident root causes use a privacy-reviewed canonical
+     `incidents/<case-id>/report.md`, with `scripts/incident_case.py validate`
+     passing.
+   Cite the bundle or case report and case UUID in wiki sources. Do not cite a
+   product repository `cases/` path.
+6. Keep raw session notes out of git by default.
+7. Prefer links to `AGENTS.md`, project profiles, skills, references, and research bundles instead of duplicating content.
+8. Do not publish verified wiki knowledge from raw notes without explicit maintainer approval.
+9. Run the smallest relevant verification:
    - read changed wiki pages;
    - run available wiki lint/status scripts;
    - validate this skill when it changes.
-9. Report raw capture and durable promotion separately:
+10. Report raw capture, evidence preservation, and durable promotion separately:
    - raw capture path under `wiki/sessions/`, if created;
    - promoted or committed durable memory path, if created;
    - approval gate used, remaining risks, and whether a commit is needed.
@@ -43,4 +53,7 @@ Use this skill for the CodexHome LLM-wiki lifecycle. Keep durable repository mem
 - Use `wiki/decisions/` for durable local decisions.
 - Use `wiki/drafts/` for proposed changes awaiting review.
 - Use gitignored `wiki/sessions/` or external storage for raw notes.
+- Use `research/<bundle-id>/` for gated investigation evidence; keep sensitive source material in its gitignored `local/` directory.
+- Use `incidents/<case-id>/` for canonical incident reports and knowledge
+  dispositions; keep raw case evidence in its gitignored `local/` directory.
 - Use `wiki/system/` for generic lifecycle mechanics and page contracts.

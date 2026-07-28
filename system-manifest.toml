@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.13"
-description = "Minimal CodexHome starter surface with generic LLM wiki lifecycle core."
+starter_version = "v0.2.0"
+description = "CodexHome starter with generic knowledge, research, incident, and evidence lifecycle tooling."
 default_class = "reserved_user"
 prune = "manual"
 matching = "specific_before_glob"
@@ -16,6 +16,11 @@ commands = [
   "uv run python scripts/tests/test_system_lock.py",
   "uv run python scripts/tests/test_sync_system.py",
   "uv run python scripts/tests/test_release_hygiene.py",
+  "uv run python scripts/tests/test_evidence_gate.py",
+  "uv run python scripts/tests/test_incident_case.py",
+  "uv run python scripts/tests/test_evidence_offload.py",
+  "uv run python scripts/tests/test_migrate_incident_cases.py",
+  "uv run python scripts/tests/test_audit_incident_links.py",
   "uv run python scripts/tests/test_bootstrap_instance.py",
   "uv run python scripts/tests/test_publish_instance.py",
 ]
@@ -49,6 +54,12 @@ path = ".gitignore"
 class = "managed"
 content = "text"
 note = "Starter-generic ignores only."
+
+[[paths]]
+path = ".gitattributes"
+class = "managed"
+content = "text"
+note = "Portable line-ending policy for committed research evidence."
 
 [[paths]]
 path = ".python-version"
@@ -141,6 +152,12 @@ content = "text"
 note = "Generic workflow skill."
 
 [[paths]]
+path = ".codex/skills/incident-evidence-offload/**"
+class = "managed"
+content = "text"
+note = "Generic encrypted incident evidence preservation and recovery workflow."
+
+[[paths]]
 path = ".codex/skills/llm-wiki-lifecycle/**"
 class = "managed"
 content = "text"
@@ -231,6 +248,18 @@ content = "text"
 note = "Generic incident directory rules."
 
 [[paths]]
+path = "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml"
+class = "managed"
+content = "text"
+note = "Safe empty template for the instance-owned public recipient registry."
+
+[[paths]]
+path = "research/README.md"
+class = "managed"
+content = "text"
+note = "Generic research evidence bundle contract."
+
+[[paths]]
 path = "wiki/system/**"
 class = "managed"
 content = "text"
@@ -241,6 +270,18 @@ path = "scripts/wiki_common.py"
 class = "managed"
 content = "text"
 note = "Generic wiki lint support."
+
+[[paths]]
+path = "scripts/evidence_offload.py"
+class = "managed"
+content = "text"
+note = "Generic encrypted incident evidence offload and restore tooling."
+
+[[paths]]
+path = "scripts/tests/test_evidence_offload.py"
+class = "managed"
+content = "text"
+note = "Encrypted incident evidence offload verification."
 
 [[paths]]
 path = "scripts/wiki_lint.py"
@@ -313,6 +354,54 @@ path = "scripts/tests/test_release_hygiene.py"
 class = "managed"
 content = "text"
 note = "Clean starter release hygiene regression test."
+
+[[paths]]
+path = "scripts/evidence_gate.py"
+class = "managed"
+content = "text"
+note = "Generic research evidence privacy and integrity gate."
+
+[[paths]]
+path = "scripts/tests/test_evidence_gate.py"
+class = "managed"
+content = "text"
+note = "Research evidence gate regression test."
+
+[[paths]]
+path = "scripts/incident_case.py"
+class = "managed"
+content = "text"
+note = "Generic canonical incident case creation, validation, and index command."
+
+[[paths]]
+path = "scripts/migrate_incident_cases.py"
+class = "managed"
+content = "text"
+note = "Generic hash-first legacy incident case migration command."
+
+[[paths]]
+path = "scripts/audit_incident_links.py"
+class = "managed"
+content = "text"
+note = "Generic legacy incident cross-reference audit command."
+
+[[paths]]
+path = "scripts/tests/test_incident_case.py"
+class = "managed"
+content = "text"
+note = "Canonical incident case contract regression test."
+
+[[paths]]
+path = "scripts/tests/test_migrate_incident_cases.py"
+class = "managed"
+content = "text"
+note = "Legacy incident migration and deduplication regression test."
+
+[[paths]]
+path = "scripts/tests/test_audit_incident_links.py"
+class = "managed"
+content = "text"
+note = "Legacy incident cross-reference audit regression test."
 
 [[paths]]
 path = "scripts/tests/test_bootstrap_instance.py"
@@ -395,6 +484,13 @@ content = "text"
 note = "Optional local sync policy overlay."
 
 [[paths]]
+path = "incidents/PUBLIC-AGE-RECIPIENTS.yaml"
+class = "scaffold_once"
+content = "text"
+source = "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml"
+note = "Instance-owned public age recipient registry."
+
+[[paths]]
 path = ".codex/skills/*"
 class = "reserved_user"
 note = "Any skill not explicitly listed as managed is instance-owned."
@@ -408,6 +504,11 @@ note = "Project profiles and local project indexes are instance-owned except exp
 path = "incidents/*"
 class = "reserved_user"
 note = "Incident reports and artifacts are instance-owned."
+
+[[paths]]
+path = "research/*"
+class = "reserved_user"
+note = "Research evidence bundles are instance-owned except the generic contract."
 
 [[paths]]
 path = "references/*"

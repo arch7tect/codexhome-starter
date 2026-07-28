@@ -1,0 +1,8 @@
+research/** text eol=lf
+incidents/**/*.md text eol=lf
+incidents/**/*.yaml text eol=lf
+incidents/**/*.yml text eol=lf
+incidents/**/*.json text eol=lf
+incidents/**/*.jsonl text eol=lf
+incidents/**/*.csv text eol=lf
+incidents/**/*.txt text eol=lf

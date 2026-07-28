@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 import tomllib
@@ -116,6 +117,59 @@ def print_env_changes(changes: list[str]) -> None:
         print(f"- Updated `{key}` in `.env`.")
 
 
+def ensure_claude_skills_bridge() -> tuple[str, str]:
+    link_path = ROOT / ".claude" / "skills"
+    canonical_path = ROOT / ".codex" / "skills"
+    relative_target = Path("..") / ".codex" / "skills"
+
+    if os.path.lexists(link_path):
+        if link_path.is_symlink():
+            current_target = Path(os.readlink(link_path))
+            resolved_target = (link_path.parent / current_target).resolve()
+            if resolved_target == canonical_path.resolve():
+                return "already-correct", "`.claude/skills` already points to `.codex/skills`."
+            return (
+                "present-but-different",
+                f"`.claude/skills` is a different symlink ({current_target}); left unchanged.",
+            )
+        return (
+            "present-but-different",
+            "`.claude/skills` already exists and is not the generated bridge; left unchanged.",
+        )
+
+    ignored = subprocess.run(
+        ["git", "check-ignore", "-q", "--no-index", ".claude/skills"],
+        cwd=ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if ignored.returncode != 0:
+        return (
+            "not-ignored",
+            "`.claude/skills` is not ignored by Git; bridge creation was skipped.",
+        )
+
+    try:
+        link_path.parent.mkdir(parents=True, exist_ok=True)
+        link_path.symlink_to(relative_target, target_is_directory=True)
+    except OSError as exc:
+        return (
+            "platform-unsupported",
+            f"Could not create `.claude/skills`: {exc}. Configure Claude Code skill discovery manually.",
+        )
+    return "created", "Created `.claude/skills` pointing to `.codex/skills`."
+
+
+def print_claude_skills_bridge(result: tuple[str, str]) -> None:
+    status, message = result
+    print()
+    print("# Claude Code Skills")
+    print(f"- {message}")
+    if status == "present-but-different":
+        print("- Review the existing path before relying on Claude Code skill discovery.")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Initialize a CodexHome instance from the starter scaffold.")
     parser.add_argument("--manifest", default="system-manifest.toml", help="Path to system manifest.")
@@ -160,6 +214,7 @@ def main() -> int:
     env_changes = configure_env(args.projects_root)
     if env_changes:
         print_env_changes(env_changes)
+    print_claude_skills_bridge(ensure_claude_skills_bridge())
 
     print()
     print("# Next Steps")

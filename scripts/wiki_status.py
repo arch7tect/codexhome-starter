@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 from collections import Counter
 
 from wiki_common import WIKI_DIR, has_errors, lint_pages, load_pages

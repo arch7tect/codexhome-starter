@@ -46,6 +46,7 @@ Baseline classification:
 | `.env.template` | managed | Portable variable contract. |
 | `.env` | scaffold_once | Local and ignored after creation. |
 | `.gitignore` | managed | Generic ignore rules only. Local untracked ignore needs should use `.git/info/exclude`. |
+| `.claude/skills` | generated local bridge | Ignored relative symlink created by bootstrap when supported; never owned by sync or shipped in the release lock. |
 | `.codex/skills/README.md` | managed | Generic directory rules only. |
 | `.codex/skills/<generic-skill>/` | managed | Only when explicitly listed in the manifest. |
 | `.codex/skills/<local-skill>/` | reserved_user | Default for any skill directory not explicitly listed as managed. |
@@ -58,7 +59,11 @@ Baseline classification:
 | `projects/index.local.md` | scaffold_once | Optional local project index, never overwritten after creation. |
 | `projects/*` | reserved_user | Except explicitly listed scaffold templates. |
 | `incidents/README.md` | managed | Generic directory rules only. |
+| `incidents/PUBLIC-AGE-RECIPIENTS.example.yaml` | managed | Empty public-only registry scaffold source. |
+| `incidents/PUBLIC-AGE-RECIPIENTS.yaml` | scaffold_once | Instance-owned public recipient registry, never shipped in the starter tree. |
 | `incidents/*` | reserved_user | Includes incident reports and artifacts. |
+| `research/README.md` | managed | Generic durable textual evidence contract. |
+| `research/*` | reserved_user | Investigation bundles and local evidence are instance-owned. |
 | `wiki/index.md` | scaffold_once | Generic wiki entrypoint created when missing, then local-owned. |
 | `wiki/system/**` | managed | Generic wiki lifecycle and operating knowledge. |
 | `wiki/sessions/` | reserved_user | Raw local capture, ignored by git. |
@@ -119,6 +124,8 @@ Expected scaffold-once paths:
 - `projects/_template.md` for the initial project profile template;
 - `projects/index.local.md` for local project indexes when needed;
 - `wiki/index.md` for local wiki navigation when needed;
+- `incidents/PUBLIC-AGE-RECIPIENTS.yaml` copied from the empty public-only
+  example and then maintained by the instance;
 - `instance-manifest.toml` for local sync policy overlays when needed;
 - local placeholder files for ignored directories when needed;
 - optional local config files that should never be overwritten after first creation.

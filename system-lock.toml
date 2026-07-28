@@ -1,6 +1,6 @@
 schema_version = 1
-starter_version = "v0.1.13"
-generated_at = "2026-06-17T21:27:24Z"
+starter_version = "v0.2.0"
+generated_at = "2026-07-29T00:02:46Z"
 source = "."
 
 [[paths]]
@@ -49,13 +49,25 @@ sha256 = "ba2633b24e73400538b2d3fd3c1968e0851e04428d39c84f51c09d407415b5e3"
 path = ".codex/skills/claude-code-consult/SKILL.md"
 class = "managed"
 content = "text"
-sha256 = "a3e668ee59441baa6c83e37e4d3b709b4bc14d08806ffd79ff558d1b8a0c0d01"
+sha256 = "fd879e8e07e5619e02c604253150964fff2596814dbf7e466e8601343e3e608d"
 
 [[paths]]
 path = ".codex/skills/claude-code-consult/agents/openai.yaml"
 class = "managed"
 content = "text"
-sha256 = "841309ca3474d7e6ff181f6571a08d1f89385d0e264b51c8de0b1e1f2de34523"
+sha256 = "7c2a99e18da50edcb9718c35a6c92e381ea4e18132d1dc99e5fbc89e22701c5b"
+
+[[paths]]
+path = ".codex/skills/claude-code-consult/scripts/run_consult.py"
+class = "managed"
+content = "text"
+sha256 = "97de639e093820a330338a8fda2c8dfa224de70386adfa2a22c603f4254e2337"
+
+[[paths]]
+path = ".codex/skills/claude-code-consult/tests/test_run_consult.py"
+class = "managed"
+content = "text"
+sha256 = "fd8ee1ff6f2ad6182f942a80929d93e1f0631bf51f014e7b68fd5e4ec08095cd"
 
 [[paths]]
 path = ".codex/skills/code-reviewer/SKILL.md"
@@ -130,10 +142,22 @@ content = "text"
 sha256 = "0f00884d2f4f9ecd3e44b6a46398e052430ecf8145c843e240809427eb1bdb5a"
 
 [[paths]]
+path = ".codex/skills/incident-evidence-offload/SKILL.md"
+class = "managed"
+content = "text"
+sha256 = "361665a1407aaa8e7b052f7c16aee9058c59c76ab81621ab9e49eeb226095f66"
+
+[[paths]]
+path = ".codex/skills/incident-evidence-offload/agents/openai.yaml"
+class = "managed"
+content = "text"
+sha256 = "14204db19a89ce09bf54217450fd5c907544d373de286b33493d14a9a1290ec9"
+
+[[paths]]
 path = ".codex/skills/llm-wiki-lifecycle/SKILL.md"
 class = "managed"
 content = "text"
-sha256 = "627bbb3ca1977ef7000617ddfc7cb30a2b1463ff8826d80b7e6b0845ce88e8f7"
+sha256 = "2c72f06382fa8104bdeaaf84ad5612775b46840151e081fc553683a3b8ff310e"
 
 [[paths]]
 path = ".codex/skills/llm-wiki-lifecycle/agents/openai.yaml"
@@ -181,7 +205,7 @@ sha256 = "aac6afc34e16b452cbdc4bf17c152105da5ea36ed954075a01b5d255e2e8da19"
 path = ".codex/skills/session-memory-review/SKILL.md"
 class = "managed"
 content = "text"
-sha256 = "67ef4b1feb34d8e9030dc87ace51fe5931b1226c1bdbdee1ede8633935ae8d46"
+sha256 = "f640ce0613f9caeb0e366561f0f825c02356fb496a52fece9f8c1bacc02f4c5b"
 
 [[paths]]
 path = ".codex/skills/session-memory-review/agents/openai.yaml"
@@ -205,7 +229,7 @@ sha256 = "5ce9214d17d3ffc89204752ab4622a2b3d24051af1d30794a138e32896fe32fd"
 path = ".codex/skills/starter-update/SKILL.md"
 class = "managed"
 content = "text"
-sha256 = "b36c6db621e5c71fbbf795cfb8e9a26ed54f5ad9e7d9c5e54edfb85457d56cc9"
+sha256 = "ca3fea3598343591be59b7bc53e3361242fa795a813c5be53d29e0de66dc0830"
 
 [[paths]]
 path = ".codex/skills/starter-update/agents/openai.yaml"
@@ -241,13 +265,19 @@ sha256 = "c484bd0b904e23323acba2bf1157db1ccabdd719ebc2b124724cbff0d09e8d2e"
 path = ".env.template"
 class = "managed"
 content = "text"
-sha256 = "09e9712a9d8d2127fb0dc580e861e38c3edc1e6bc0ed0af0edcca115c9bc586d"
+sha256 = "bfacb8ad07ba00562735f49edf2d9f43cc19489a450a09b9edf91c298a39334f"
+
+[[paths]]
+path = ".gitattributes"
+class = "managed"
+content = "text"
+sha256 = "f4abf0c940ea553bcb620d5e7e21ec3579adce23c32cc011bb3511193d505c22"
 
 [[paths]]
 path = ".gitignore"
 class = "managed"
 content = "text"
-sha256 = "496e1201795582c506891c9a69c0e7163d93617dda17952e08feaa3b15ff1316"
+sha256 = "766990d9c4e677b4c6f3600985594671ac9eba112bc3a58cfdbe8a78d2dcc3f3"
 
 [[paths]]
 path = ".python-version"
@@ -259,25 +289,31 @@ sha256 = "02e735b3dfe1c32833eb550b7ff8ffa17f5f2bc3fa1e7bae61a8f5a3883ce398"
 path = "AGENTS.md"
 class = "managed"
 content = "text"
-sha256 = "03f095410fee82359da1e40c3e1c8fc5a3f7b37ddf7da1aea49dbbfb1b285751"
+sha256 = "2058da2fb969b5fc7a549fa2ad958066e1266e7563256f7bd3a106f26355ebc6"
 
 [[paths]]
 path = "CLAUDE.md"
 class = "managed"
 content = "text"
-sha256 = "3c4997f0c9e444ea8cda6ea817ec8b5228d0aef854dc52885fa03eb6299eef95"
+sha256 = "7391485bb991ae8a6d0849b417659a42adae9db1dc09bf060d27fc02e1cace8e"
 
 [[paths]]
 path = "README.md"
 class = "managed"
 content = "text"
-sha256 = "a228798e37e750b5576807e0dcb27b02b25ce87edd1aa3a72ec4e60e79a761a8"
+sha256 = "096070cd86b4b6876aa4b087a7d43b2eec0c89ca11273a475e40c011b0d93782"
+
+[[paths]]
+path = "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml"
+class = "managed"
+content = "text"
+sha256 = "ca0de4a3e80ea91f4eb2c78f7da0b8d31b7affb537038cd945b7104df9dbda91"
 
 [[paths]]
 path = "incidents/README.md"
 class = "managed"
 content = "text"
-sha256 = "45388242463ba5bc739c301b26a8f10ecc5bf2e99954600a3d1ded1d14a74fe9"
+sha256 = "5f0543c7cbc9448ec40da4cd8843ca509f49cf6a0a2a295d93fc36ff7a2461fd"
 
 [[paths]]
 path = "projects/README.md"
@@ -289,7 +325,7 @@ sha256 = "324199fb7c686a736cc4bf284b0df3e289331228eebae34d35c6e1905db1bde9"
 path = "pyproject.toml"
 class = "managed"
 content = "text"
-sha256 = "11e3875023ee4f28cf20b73c0d5f383814eebb0711686f1572c2a0953cddb926"
+sha256 = "243e68824d931b6a6d6656d1eb17830dd47202a4c0a4d4d2c5417399eb40836f"
 
 [[paths]]
 path = "references/README.md"
@@ -301,19 +337,19 @@ sha256 = "0269002411599e51c8160fd55d58de6b2e0a4d9cb07cd8f846af2a2fde95d847"
 path = "references/getting-started-with-codexhome.md"
 class = "managed"
 content = "text"
-sha256 = "94e779e9d268f2aad5ba8e8c59799a28e826b01757ed2f7029bd1cc7fb4f6aa5"
+sha256 = "46dbf3f9e06dbb37ee78012d7d12a690cd577e49ddc480902d0558c80615f42c"
 
 [[paths]]
 path = "references/starter-instance-sync.md"
 class = "managed"
 content = "text"
-sha256 = "d6b834e7e99fd873f0b520ccc439740ae14e312da4b7b3087d5b644f97e75a69"
+sha256 = "ef95c35d7c6797295b01a73d28f5fcd139511adfa953bda1b8ccfa8a821a7aa3"
 
 [[paths]]
 path = "references/starter-release-procedure.md"
 class = "managed"
 content = "text"
-sha256 = "2f4f44ad3b14ec1d6fdacc2a7deaaff841d20ee75bc3475dfa7100c86f32a536"
+sha256 = "5acee65d7f342e87728048d701ad6afb280b58465406b2480de19cd6db957c21"
 
 [[paths]]
 path = "references/system/git-host-workflow-policy.md"
@@ -364,16 +400,52 @@ content = "text"
 sha256 = "9007f70b74c40ba1c126d4d1e4fbdc8965705326d82215d575a387f2eb2ee02a"
 
 [[paths]]
+path = "research/README.md"
+class = "managed"
+content = "text"
+sha256 = "0efd24b06e735d13a4887762af65f703f38e783ef66d79f8f8f2bb526ad62a7c"
+
+[[paths]]
+path = "scripts/audit_incident_links.py"
+class = "managed"
+content = "text"
+sha256 = "1a645aec9855134c00f4342591a102d1b0400684dec3b5f6de35a018b1839bea"
+
+[[paths]]
 path = "scripts/bootstrap_instance.py"
 class = "managed"
 content = "text"
-sha256 = "eeee140b336e9c6e26917c1d6451831851b1cb55ec2448219b7a61325a78aefc"
+sha256 = "8d5b015f8c9071ff16ca6a7d5dcadd5fe1f2e04b993937b806badccded168fbd"
+
+[[paths]]
+path = "scripts/evidence_gate.py"
+class = "managed"
+content = "text"
+sha256 = "de8f6cd6d66732cb870992cab84d3dc2f0b376ae675ea15bdc392ed2ee2f3d8e"
+
+[[paths]]
+path = "scripts/evidence_offload.py"
+class = "managed"
+content = "text"
+sha256 = "8d2e82cb60c146c3b75997eee12ee9be2a7c46a2eb7ec60da9dcf8577b42df67"
+
+[[paths]]
+path = "scripts/incident_case.py"
+class = "managed"
+content = "text"
+sha256 = "f57dd30f568ebb59ce473bb8bb01146e92e423279d86ba346a4a2e2527e93134"
+
+[[paths]]
+path = "scripts/migrate_incident_cases.py"
+class = "managed"
+content = "text"
+sha256 = "81056e601b525e80abc0cf696f0a9ea3ca3dfdc81b525dd50b39b1f62a51e054"
 
 [[paths]]
 path = "scripts/publish_instance.py"
 class = "managed"
 content = "text"
-sha256 = "f947e3d846891c737ba2c93a3bbc75f57a8a4cdd9b418ad439eba937d1abe741"
+sha256 = "a4a14d0a183f1309d60c10c56de279d5d48feb484f0d8f8d33f4f41433c11db6"
 
 [[paths]]
 path = "scripts/release_hygiene.py"
@@ -385,7 +457,7 @@ sha256 = "0a219b8995183e770db6f44236ea6977be2f8c13f9c9e0c041165d44999c84bd"
 path = "scripts/sync_system.py"
 class = "managed"
 content = "text"
-sha256 = "5c84bb70b518127b15c1e75f9b489ee76604398a1d246804b13393ac348c8a18"
+sha256 = "f9c511f127664f3ef68adfb374587db67b59731ec8a052d7320c12ae7aa0a241"
 
 [[paths]]
 path = "scripts/system_lock.py"
@@ -394,10 +466,40 @@ content = "text"
 sha256 = "a24118466bdc95638385eed40956929d6b467a86259461dc57b84969932f4668"
 
 [[paths]]
+path = "scripts/tests/test_audit_incident_links.py"
+class = "managed"
+content = "text"
+sha256 = "977ff2dc9488f70624011575aa548db89fd092a1618912b7b485dbe5142a94db"
+
+[[paths]]
 path = "scripts/tests/test_bootstrap_instance.py"
 class = "managed"
 content = "text"
-sha256 = "0901e80fd7b7e8c3dec05e16a71621cc8e1feefc146f0688bc54962077d98951"
+sha256 = "0c6716fe96d266abbe5f4d52e8eb9bbc61a18aef96c50fdf82349c0c503a5708"
+
+[[paths]]
+path = "scripts/tests/test_evidence_gate.py"
+class = "managed"
+content = "text"
+sha256 = "f8d750c553f9199709d4237a0c746dcc393d7d287d9601d44a2f487229e4570c"
+
+[[paths]]
+path = "scripts/tests/test_evidence_offload.py"
+class = "managed"
+content = "text"
+sha256 = "c60201d2a64f6bec99bb54c00504dbad28fb181db2f4d988da8e9f38955cc534"
+
+[[paths]]
+path = "scripts/tests/test_incident_case.py"
+class = "managed"
+content = "text"
+sha256 = "7efff91751847bcd354027fd9f66b6510e6146bac2ca0a845bcfc4a8db9cb485"
+
+[[paths]]
+path = "scripts/tests/test_migrate_incident_cases.py"
+class = "managed"
+content = "text"
+sha256 = "40022e8b12a8381c9723e6b733a845d678a3568c6adee63c687a03468067c6aa"
 
 [[paths]]
 path = "scripts/tests/test_publish_instance.py"
@@ -409,13 +511,13 @@ sha256 = "7a7f4967425f05761379294431fc3174b5212701d2b2e999e53a0dd0e648a6fd"
 path = "scripts/tests/test_release_hygiene.py"
 class = "managed"
 content = "text"
-sha256 = "cfe6d2f4d3a97eb13298829ca41942a9ad70273da6327ee8ce25804a4e1daa6d"
+sha256 = "1de13af29053c7fa1119168e220f391c2a9b9ef5f04b52b4f77ded324ff81b65"
 
 [[paths]]
 path = "scripts/tests/test_sync_system.py"
 class = "managed"
 content = "text"
-sha256 = "dd6544e18701f72c21c38ba638105420336b62baadd0e1533fdd9b06c06b69a3"
+sha256 = "7e2e8c864f8ec29d4b2dca30f403864c055f896b3a20c37b90e41afd5679c58a"
 
 [[paths]]
 path = "scripts/tests/test_system_lock.py"
@@ -445,34 +547,34 @@ sha256 = "2b055931fb11ea15f7d3656d5bd55d60753298fad47404bf8138065d5896df29"
 path = "scripts/wiki_promote.py"
 class = "managed"
 content = "text"
-sha256 = "51d573cf9445abaad2ed79da3b60edc021d0837c9d877cba741c66606d61482c"
+sha256 = "6295fb4b30eb5f39416a8731cc05641496551f4d19129c88f17e8ef04939a8a8"
 
 [[paths]]
 path = "scripts/wiki_status.py"
 class = "managed"
 content = "text"
-sha256 = "584c51106b583bf72176173f54b8f6e3301ab83f7803f5e381fa024043a55879"
+sha256 = "0c9ad3d8c96571827988ef4ccd4184c2428869af52da7fbd0878121e189d660b"
 
 [[paths]]
 path = "system-manifest.toml"
 class = "managed"
 content = "text"
-sha256 = "9fb2b4e55c560eff3c4c1da9e74285cbcc4a3586c49008f214fcaa5d9ebb0244"
+sha256 = "67800d45444d9207e8439d657bdbeca3bdd411c0766b459318404cf13adf8a4d"
 
 [[paths]]
 path = "uv.lock"
 class = "managed"
 content = "text"
-sha256 = "bad2664023351ac0b79f0f8b74277fc3ebc8e023be2c9d906b85ad364ccb8bcd"
+sha256 = "e44b89f4f8d06a06d1643859f13b6d02ccb59494f876e7cb70a3b0decc5ded7b"
 
 [[paths]]
 path = "wiki/system/lifecycle.md"
 class = "managed"
 content = "text"
-sha256 = "61177bf45f8eef550d3a705dbd25da1b95682add6945c821004c447543c8c6fa"
+sha256 = "0be31c642e61c0386b18bcc8a799beb3b80b201cbcc9fc4faba48d67d2cfa543"
 
 [[paths]]
 path = "wiki/system/page-contract.md"
 class = "managed"
 content = "text"
-sha256 = "7ce5d15b42be5628fd59b87a227e9266dda33866f44ef33f095d39e20b6bfbf1"
+sha256 = "0d6a434229ba43625553ef1111cb5d5540d9a797f5236879f557ff6801169841"

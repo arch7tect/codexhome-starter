@@ -1,8 +1,8 @@
 ---
 status: active
-updated: 2026-06-17
+updated: 2026-07-29
 confidence: decision
-expires: 2027-06-17
+expires: 2027-07-29
 sources:
   - references/getting-started-with-codexhome.md
   - scripts/wiki_common.py
@@ -13,7 +13,9 @@ tags:
 
 # Wiki Page Contract
 
-Every committed wiki page must be short, sourced, and reviewable.
+Every committed wiki page must be short, sourced, and reviewable. Follow the
+[LLM Wiki Lifecycle](lifecycle.md) when capturing, promoting, verifying,
+publishing, or retiring knowledge.
 
 ## Frontmatter
 
@@ -32,6 +34,9 @@ Required fields:
 - Put low-trust raw notes under `wiki/sessions/`.
 - Put proposed changes under `wiki/drafts/`.
 - Put local concepts, context packs, and decisions under the corresponding user-owned wiki directories.
+- Cite `incidents/<case-id>/report.md` for incident-derived knowledge and keep
+  raw case evidence out of the wiki.
+- Cite `research/<bundle-id>/README.md` for investigation evidence. Never embed run-level records, transcripts, or generated reports in wiki pages.
 - Keep validation fixtures and experiment outputs out of the starter core.
 
 ## Review

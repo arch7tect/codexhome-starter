@@ -1,0 +1,4 @@
+interface:
+  display_name: "Incident Evidence Offload"
+  short_description: "Encrypt, offload, and restore incident evidence"
+  default_prompt: "Use $incident-evidence-offload to preserve or restore incident evidence safely."

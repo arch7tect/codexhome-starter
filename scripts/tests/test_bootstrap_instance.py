@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from sync_system import classify_path, iter_repo_files, load_manifest  # noqa: E402
+import bootstrap_instance  # noqa: E402
 
 
 EXPECTED_BOOTSTRAP_SCAFFOLDS = {
@@ -20,6 +21,7 @@ EXPECTED_BOOTSTRAP_SCAFFOLDS = {
     "projects/_template.md",
     "projects/index.local.md",
     "wiki/index.md",
+    "incidents/PUBLIC-AGE-RECIPIENTS.yaml",
 }
 
 
@@ -123,6 +125,11 @@ def test_bootstrap_instance_creates_expected_scaffolds_and_is_idempotent() -> No
         raise AssertionError(f"bootstrap should print next steps: {output}")
     if "Updated `CODEX_HOME` in `.env`." not in output:
         raise AssertionError(f"bootstrap should report CODEX_HOME configuration: {output}")
+    bridge = repo / ".claude" / "skills"
+    if not bridge.is_symlink() or bridge.resolve() != (repo / ".codex" / "skills").resolve():
+        raise AssertionError("bootstrap should create the Claude Code skill bridge")
+    if git(repo, "status", "--short", "--", ".claude/skills"):
+        raise AssertionError("generated Claude Code skill bridge must be ignored")
 
     projects_root = repo.parent / "projects-root"
     env_only_output = command(repo, sys.executable, "scripts/bootstrap_instance.py", "--env-only", "--projects-root", str(projects_root))
@@ -132,7 +139,7 @@ def test_bootstrap_instance_creates_expected_scaffolds_and_is_idempotent() -> No
     if "Updated `PROJECTS_ROOT` in `.env`." not in env_only_output:
         raise AssertionError(f"env-only mode should report PROJECTS_ROOT configuration: {env_only_output}")
 
-    git(repo, "add", "AGENTS.local.md", "README.local.md", "references/index.local.md", "projects/_template.md", "projects/index.local.md", "wiki/index.md", "system-lock.toml")
+    git(repo, "add", "AGENTS.local.md", "README.local.md", "references/index.local.md", "projects/_template.md", "projects/index.local.md", "wiki/index.md", "incidents/PUBLIC-AGE-RECIPIENTS.yaml", "system-lock.toml")
     git(repo, "commit", "-m", "initialize")
     second_output = command(repo, sys.executable, "scripts/bootstrap_instance.py", "--from", ".")
     if "Written paths: 0" not in second_output or "Lockfile unchanged" not in second_output:
@@ -180,9 +187,43 @@ def test_bootstrap_instance_creates_expected_scaffolds_and_is_idempotent() -> No
         raise AssertionError(f"empty env-only --projects-root should fail: {empty_env_only_root.stdout}")
 
 
+def test_claude_skills_bridge_preserves_existing_paths() -> None:
+    original_root = bootstrap_instance.ROOT
+    base = ROOT / "scripts" / "tests" / ".generated" / "bootstrap_claude_bridge"
+    if base.exists():
+        shutil.rmtree(base)
+    base.mkdir(parents=True)
+    git(base, "init")
+    (base / ".codex" / "skills").mkdir(parents=True)
+    (base / ".gitignore").write_text(".claude/skills\n", encoding="utf-8")
+    bootstrap_instance.ROOT = base
+    try:
+        status, _ = bootstrap_instance.ensure_claude_skills_bridge()
+        if status != "created":
+            raise AssertionError(f"expected created bridge, got {status}")
+        status, _ = bootstrap_instance.ensure_claude_skills_bridge()
+        if status != "already-correct":
+            raise AssertionError(f"expected already-correct bridge, got {status}")
+
+        (base / ".claude" / "skills").unlink()
+        (base / ".claude" / "skills").mkdir()
+        status, _ = bootstrap_instance.ensure_claude_skills_bridge()
+        if status != "present-but-different":
+            raise AssertionError(f"expected existing directory to be preserved, got {status}")
+
+        (base / ".claude" / "skills").rmdir()
+        (base / ".claude" / "skills").symlink_to("../missing-skills")
+        status, _ = bootstrap_instance.ensure_claude_skills_bridge()
+        if status != "present-but-different":
+            raise AssertionError(f"expected broken symlink to be reported, got {status}")
+    finally:
+        bootstrap_instance.ROOT = original_root
+
+
 def main() -> int:
     test_bootstrap_scaffold_sources_are_managed_and_present()
     test_bootstrap_instance_creates_expected_scaffolds_and_is_idempotent()
+    test_claude_skills_bridge_preserves_existing_paths()
     print("bootstrap_instance tests passed")
     return 0
 

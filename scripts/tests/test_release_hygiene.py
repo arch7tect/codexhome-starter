@@ -122,10 +122,83 @@ def test_validate_deny_terms_requires_real_matches() -> None:
         raise AssertionError(f"unexpected deny validation result: {violations}")
 
 
+def test_release_hygiene_keeps_real_registry_out_of_release() -> None:
+    base = ROOT / "scripts" / "tests" / ".generated" / "release_hygiene_registry"
+    if base.exists():
+        shutil.rmtree(base)
+    base.mkdir(parents=True)
+    git(base, "init")
+
+    write_text(base / "system-manifest.toml", """schema_version = 1
+starter_version = "test"
+default_class = "reserved_user"
+matching = "specific_before_glob"
+
+[[paths]]
+path = "system-manifest.toml"
+class = "managed"
+content = "text"
+
+[[paths]]
+path = "system-lock.toml"
+class = "managed"
+content = "text"
+
+[[paths]]
+path = "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml"
+class = "managed"
+content = "text"
+
+[[paths]]
+path = "incidents/PUBLIC-AGE-RECIPIENTS.yaml"
+class = "scaffold_once"
+content = "text"
+source = "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml"
+""")
+    write_text(
+        base / "system-lock.toml",
+        lockfile_text(
+            [
+                LockEntry("system-manifest.toml", "managed", "text", "0" * 64),
+                LockEntry("system-lock.toml", "managed", "text", "0" * 64),
+                LockEntry(
+                    "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml",
+                    "managed",
+                    "text",
+                    "0" * 64,
+                )
+            ],
+            "test",
+            ".",
+        ),
+    )
+    write_text(
+        base / "incidents/PUBLIC-AGE-RECIPIENTS.example.yaml",
+        "schema_version: 1\nkind: public-age-recipient-registry\nrecipients: []\n",
+    )
+    git(base, "add", ".")
+    if release_hygiene(base, [], []):
+        raise AssertionError("managed empty registry example should be release-safe")
+
+    write_text(
+        base / "incidents/PUBLIC-AGE-RECIPIENTS.yaml",
+        "schema_version: 1\nkind: public-age-recipient-registry\nrecipients: []\n",
+    )
+    git(base, "add", ".")
+    violations = release_hygiene(base, [], [])
+    expected = (
+        "tracked non-managed path: incidents/PUBLIC-AGE-RECIPIENTS.yaml "
+        "[scaffold_once]"
+    )
+    if expected not in violations:
+        raise AssertionError(f"real registry should not ship in a release: {violations}")
+
+
 def main() -> int:
     test_release_hygiene_rejects_tracked_non_managed_paths()
     test_release_hygiene_rejects_scaffold_lock_entries_and_deny_terms()
     test_validate_deny_terms_requires_real_matches()
+    test_release_hygiene_keeps_real_registry_out_of_release()
     print("release_hygiene tests passed")
     return 0
 

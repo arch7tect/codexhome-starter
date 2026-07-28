@@ -39,7 +39,9 @@ Use the private repository URL from GitHub, GitLab, or another host. Expect the 
 ## What's Inside
 
 - `projects/` stores profiles for codebases the agent should understand.
+- `incidents/` stores canonical diagnostic cases, safe reports, and local evidence.
 - `wiki/` stores linked durable knowledge: concepts, decisions, workflows, project maps, and lessons.
+- `research/` stores gated textual evidence bundles for benchmarks and investigations.
 - `.codex/skills/` stores reusable agent procedures.
 - `references/` stores longer guides, background material, and system documents.
 - Local scaffold files store private instance context without copying it into the clean starter.

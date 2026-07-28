@@ -1,0 +1,4 @@
+schema_version: 1
+kind: public-age-recipient-registry
+notice: Public age recipients only. Never store private identities, passwords, tokens, recovery credentials, or remote destinations here.
+recipients: []

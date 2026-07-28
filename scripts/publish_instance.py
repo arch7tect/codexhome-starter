@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLISH_PATHS = [
     "AGENTS.local.md",
     "README.local.md",
+    "incidents/PUBLIC-AGE-RECIPIENTS.yaml",
     "projects/_template.md",
     "projects/index.local.md",
     "references/index.local.md",

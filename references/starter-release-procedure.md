@@ -29,6 +29,10 @@ uv run python scripts/release_hygiene.py \
 ```
 
 The release hygiene check must pass with no tracked non-managed paths and no scaffold-once entries in `system-lock.toml`.
+The clean release tree must not contain the instance-owned
+`incidents/PUBLIC-AGE-RECIPIENTS.yaml` or the generated `.claude/skills`
+bridge. It may contain the managed empty recipient-registry example; bootstrap
+and sync create the instance-owned paths after clone.
 
 Before trusting a zero-match deny scan in the candidate release tree, validate the deny terms against the populated instance that the starter was derived from:
 
